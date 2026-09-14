@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آینده انسان از نظر قرآن — وبلاگ کاظم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jade-900: oklch(28% 0.08 160);
+    --jade-800: oklch(34% 0.10 162);
+    --jade-700: oklch(40% 0.12 160);
+    --jade-600: oklch(48% 0.13 158);
+    --jade-500: oklch(56% 0.14 158);
+    --jade-400: oklch(64% 0.13 157);
+    --jade-300: oklch(74% 0.11 156);
+    --jade-200: oklch(84% 0.09 154);
+    --jade-100: oklch(92% 0.06 152);
+    --jade-50:  oklch(97% 0.03 150);
+
+    --surface:        oklch(98% 0.01 152);
+    --surface-raised: oklch(100% 0 0);
+    --border:         var(--jade-200);
+    --muted:          var(--jade-700);
+    --body:           oklch(18% 0.04 160);
+    --accent:         var(--jade-600);
+    --accent-hover:   var(--jade-700);
+
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    background: var(--surface);
+    color: var(--body);
+    line-height: 1.85;
+    font-size: 1rem;
+  }
+
+  /* ── Progress bar ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    height: 4px;
+    background: var(--jade-200);
+    z-index: 9999;
+  }
+  #progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to left, var(--jade-500), var(--jade-300));
+    transition: width 80ms linear;
+  }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, var(--jade-800) 0%, var(--jade-600) 100%);
+    color: oklch(97% 0.03 150);
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+  }
+  header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-bottom: var(--space-2);
+  }
+  header p {
+    font-size: 0.95rem;
+    opacity: 0.82;
+  }
+
+  /* ── Layout ── */
+  .page-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-5);
+  }
+
+  /* ── Search & filter ── */
+  .controls {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-8);
+    align-items: center;
+  }
+  #search-input {
+    flex: 1 1 200px;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--surface-raised);
+    color: var(--body);
+    outline-color: var(--accent);
+    transition: border-color 140ms;
+  }
+  #search-input:focus { border-color: var(--accent); }
+
+  .filter-btn {
+    padding: var(--space-2) var(--space-4);
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-raised);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 140ms, color 140ms, border-color 140ms;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* ── TOC ── */
+  #toc {
+    background: var(--surface-raised);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+  #toc h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--jade-700);
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  #toc h2::before { content: "📋"; font-size: 1.1rem; }
+  #toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-1) var(--space-4);
+    counter-reset: toc;
+  }
+  #toc li { counter-increment: toc; }
+  #toc a {
+    color: var(--jade-700);
+    text-decoration: none;
+    font-size: 0.875rem;
+    display: block;
+    padding: var(--space-1) 0;
+    border-bottom: 1px dashed var(--jade-100);
+    transition: color 120ms;
+  }
+  #toc a::before {
+    content: counter(toc) ". ";
+    color: var(--jade-400);
+    font-weight: 600;
+  }
+  #toc a:hover { color: var(--accent-hover); }
+
+  /* ── Post card ── */
+  .post-card {
+    background: var(--surface-raised);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    overflow: hidden;
+    transition: box-shadow 180ms, border-color 180ms;
+  }
+  .post-card:hover {
+    border-color: var(--jade-300);
+    box-shadow: 0 4px 18px oklch(56% 0.13 158 / 12%);
+  }
+  .post-card[hidden] { display: none; }
+
+  /* ── Accordion ── */
+  .post-card details { border: none; }
+  .post-card summary {
+    list-style: none;
+    cursor: pointer;
+    padding: var(--space-5) var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    user-select: none;
+    position: relative;
+  }
+  .post-card summary::-webkit-details-marker { display: none; }
+  .post-card summary .toggle-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--jade-100);
+    color: var(--jade-700);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    transition: background 140ms, transform 200ms;
+  }
+  details[open] summary .toggle-icon {
+    background: var(--jade-500);
+    color: #fff;
+    transform: rotate(90deg);
+  }
+  .post-card summary .post-meta {
+    flex: 1;
+  }
+  .post-card summary .post-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--jade-800);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .post-card summary .post-date {
+    font-size: 0.78rem;
+    color: var(--jade-500);
+  }
+  .cat-badge {
+    font-size: 0.72rem;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--jade-100);
+    color: var(--jade-700);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  /* ── Post body ── */
+  .post-body {
+    padding: 0 var(--space-6) var(--space-6);
+    border-top: 1px solid var(--jade-100);
+    margin-top: 0;
+  }
+  .post-body p { margin-bottom: var(--space-4); }
+  .post-body strong { color: var(--jade-800); font-weight: 600; }
+  .post-body h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--jade-700);
+    margin: var(--space-6) 0 var(--space-3);
+    padding-right: var(--space-3);
+    border-right: 3px solid var(--jade-400);
+  }
+  .post-body ol, .post-body ul {
+    padding-right: var(--space-6);
+    margin-bottom: var(--space-4);
+  }
+  .post-body li { margin-bottom: var(--space-2); }
+  .post-body blockquote {
+    background: var(--jade-50);
+    border-right: 4px solid var(--jade-400);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: var(--space-4) var(--space-5);
+    margin: var(--space-5) 0;
+    color: var(--jade-900);
+    font-style: italic;
+    direction: rtl;
+  }
+  .arabic {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--jade-800);
+    font-weight: 500;
+    display: block;
+    margin: var(--space-3) 0;
+    text-align: center;
+    direction: rtl;
+  }
+  .post-footer {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--jade-200);
+    font-size: 0.78rem;
+    color: var(--jade-500);
+  }
+
+  /* ── No-results ── */
+  #no-results {
+    text-align: center;
+    padding: var(--space-12) var(--space-6);
+    color: var(--muted);
+    display: none;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .controls { flex-direction: column; }
+    #search-input { width: 100%; }
+    .post-card summary { padding: var(--space-4); }
+    .post-body { padding: 0 var(--space-4) var(--space-5); }
+    header { padding: var(--space-8) var(--space-4); }
+    #toc ol { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<header>
+  <h1>آینده انسان از نظر قرآن</h1>
+  <p>وبلاگ کاظم — kazem506.blogfa.com</p>
+</header>
+
+<div class="page-wrap">
+
+  <!-- Controls -->
+  <div class="controls">
+    <input type="search" id="search-input" placeholder="جستجو در مطالب..." aria-label="جستجو">
+    <button class="filter-btn active" data-cat="all">همه</button>
+    <button class="filter-btn" data-cat="انسان-و-خلقت">انسان و خلقت</button>
+    <button class="filter-btn" data-cat="اخلاق-و-معنوی">اخلاق و معنوی</button>
+    <button class="filter-btn" data-cat="خانواده">خانواده</button>
+    <button class="filter-btn" data-cat="عقاید">عقاید</button>
+    <button class="filter-btn" data-cat="پیامبر-و-ائمه">پیامبر و ائمه</button>
+  </div>
+
+  <!-- TOC -->
+  <nav id="toc" aria-label="فهرست مطالب">
+    <h2>فهرست دسترسی سریع</h2>
+    <ol id="toc-list"></ol>
+  </nav>
+
+  <!-- Posts -->
+  <main id="posts-container">
+
+    <!-- POST 36 -->
+    <article class="post-card" data-cat="اخلاق-و-معنوی" id="post-36">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">هر حادثه و مصیبتی دارای علتی است</span>
+            <span class="post-date">جمعه پنجم آبان ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">اخلاق و معنوی</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>در قرآن کریم سوره شوری آیه ۳۰ آمده است:</p>
+          <p class="arabic">وَمَا أَصَابَكُم مِّن مُّصِيبَةٍ فَبِمَا كَسَبَتْ أَيْدِيكُمْ وَيَعْفُو عَن كَثِيرٍ</p>
+          <p>ترجمه: هر مصیبتی که به شما می‌رسد به خاطر اعمالی است که خودتان کرده‌اید و خداوند از بسیاری هم می‌گذرد.</p>
+          <p>این آیه شریفه به ما می‌گوید که مصیبت‌ها و حوادث تصادفی نیستند بلکه معلول اعمال خود انسان‌هاست. البته خداوند از بسیاری از گناهان و اشتباهات می‌گذرد و اگر بخواهد همه را مجازات کند هیچکس روی زمین باقی نمی‌ماند.</p>
+          <h3>نکته‌های مهم آیه</h3>
+          <ol>
+            <li>مصیبت‌ها و گرفتاری‌های دنیوی نتیجه اعمال خود انسان‌هاست.</li>
+            <li>خداوند از بسیاری از گناهان می‌گذرد — رحمت الهی بر غضبش پیشی دارد.</li>
+            <li>این آیه دلیل محکمی است بر اینکه انسان موجودی مختار است و اعمالش در سرنوشتش مؤثر است.</li>
+            <li>طبیعت نیز مطیع خداست و آنچه اتفاق می‌افتد بی‌حکمت نیست.</li>
+            <li>انسان نباید در برابر مصیبت‌ها بی‌تفاوت باشد بلکه باید در پی علت آن باشد.</li>
+          </ol>
+          <p>آیه ۱۷ سوره حدید نیز می‌فرماید: <span class="arabic">اعْلَمُوا أَنَّ اللَّهَ يُحْيِي الْأَرْضَ بَعْدَ مَوْتِهَا</span> که نشان‌دهنده قانون احیا و باززایی در طبیعت است.</p>
+          <p>همچنین در سوره بقره آیه ۱۵۵ می‌خوانیم که خداوند مؤمنان را با ترس، گرسنگی، کمبود مال، جان و میوه‌ها می‌آزماید و به صابران بشارت می‌دهد. پس برخی مصیبت‌ها آزمون الهی هستند نه عقوبت.</p>
+          <div class="post-footer">[+] نوشته شده در جمعه پنجم آبان ۱۳۹۱ ساعت 16:39 توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 35 -->
+    <article class="post-card" data-cat="عقاید" id="post-35">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">قضا و قدر</span>
+            <span class="post-date">پنجشنبه سی‌ام شهریور ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">عقاید</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>قضا و قدر یکی از موضوعات بنیادین در کلام اسلامی است. در قرآن کریم سوره قمر آیه ۴۹ می‌فرماید:</p>
+          <p class="arabic">إِنَّا كُلَّ شَيْءٍ خَلَقْنَاهُ بِقَدَرٍ</p>
+          <p>ترجمه: ما هر چیزی را با اندازه‌گیری آفریده‌ایم.</p>
+          <h3>تعریف قضا و قدر</h3>
+          <p><strong>قدر</strong> یعنی اندازه و مقدار هر چیز — همان قوانین علّی و معلولی که در هستی جاری است. <strong>قضا</strong> یعنی حکم و فرمان نهایی ال      <ا علم پیشین خدا مرتبط است.</p>
+          <p>مهم‌ترین نکته این است که قضا و قدر با اختیار انسان منافات ندارد. خداوند علم دارد که انسان چه انتخابی خواهد کرد، اما این علم پیشین، اجبار نیست. مثال: یک معلم می‌داند کدام دانش‌آموز تنبل است و قبول نمی‌شود، اما این علم، دانش‌آموز را مجبور به تنبلی نمی‌کند.</p>
+          <h3>آیه‌های مرتبط</h3>
+          <p>سوره رعد آیه ۱۱: <span class="arabic">إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ</span></p>
+          <p>این آیه نشان می‌دهد که تغییر سرنوشت به دست خود انسان است — دلیلی دیگر بر اختیار انسان در چارچوب قضا و قدر الهی.</p>
+          <div class="post-footer">[+] نوشته شده در پنجشنبه سی‌ام شهریور ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 34 -->
+    <article class="post-card" data-cat="عقاید" id="post-34">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">روایات</span>
+            <span class="post-date">یکشنبه نوزدهم شهریور ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">عقاید</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>در این مقاله به بررسی روایات و احادیث و شرایط اعتبار آن‌ها می‌پردازیم. قرآن کریم معیار سنجش روایات است. هر روایتی که با قرآن مخالف باشد باید کنار گذاشته شود.</p>
+          <h3>معیارهای سنجش روایت</h3>
+          <ol>
+            <li><strong>موافقت با قرآن:</strong> روایتی معتبر است که با آیات قرآن هماهنگ باشد.</li>
+            <li><strong>سند معتبر:</strong> راویان ثقه و مورد اعتماد باشند.</li>
+            <li><strong>عدم تعارض:</strong> با روایات صحیح‌تر و قطعی‌تر تعارض نداشته باشد.</li>
+            <li><strong>موافقت با عقل:</strong> با اصول عقلانی سازگار باشد.</li>
+          </ol>
+          <p>امام صادق علیه‌السلام فرمودند: «هر چه مخالف قرآن است آن را بر دیوار بزنید» — یعنی کنار بگذارید. این معیار اساسی است که متأسفانه گاه نادیده گرفته می‌شود.</p>
+          <h3>انواع روایات از نظر اعتبار</h3>
+          <ul>
+            <li><strong>صحیح:</strong> سند کامل و راویان ثقه</li>
+            <li><strong>موثق:</strong> راوی غیرامامی اما ثقه</li>
+            <li><strong>حسن:</strong> راوی ممدوح بدون توثیق صریح</li>
+            <li><strong>ضعیف:</strong> مشکل در سند یا متن</li>
+            <li><strong>موضوع (مجعول):</strong> ساختگی و بی‌اعتبار</li>
+          </ul>
+          <div class="post-footer">[+] نوشته شده در یکشنبه نوزدهم شهریور ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 33 -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-33">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">حیات زمین</span>
+            <span class="post-date">پنجشنبه هشتم شهریور ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>قرآن کریم در آیات متعددی به حیات زمین و چرخه طبیعی آن اشاره کرده است. سوره حدید آیه ۱۷:</p>
+          <p class="arabic">اعْلَمُوا أَنَّ اللَّهَ يُحْيِي الْأَرْضَ بَعْدَ مَوْتِهَا</p>
+          <p>ترجمه: بدانید که خداوند زمین را پس از مردنش زنده می‌کند.</p>
+          <p>این آیه علاوه بر معنای ظاهری (احیای زمین با باران)، اشاره‌ای به رستاخیز انسان نیز دارد — همان‌گونه که زمین مرده با باران زنده می‌شود، انسان‌ها نیز پس از مرگ برانگیخته می‌شوند.</p>
+          <h3>مراحل حیات زمین از دیدگاه قرآن</h3>
+          <ol>
+            <li>خلق زمین و آماده‌سازی برای زندگی (فصلت ۱۰)</li>
+            <li>فرستادن باران و رویش گیاهان (عبس ۲۵-۳۲)</li>
+            <li>تنوع زیستی به عنوان آیت الهی (بقره ۱۶۴)</li>
+            <li>مرگ و بازگشت دوباره زمین (حج ۵)</li>
+          </ol>
+          <p>این چرخه طبیعی درسی برای انسان است که بداند مرگ پایان نیست و حیاتی دیگر در پیش است.</p>
+          <div class="post-footer">[+] نوشته شده در پنجشنبه هشتم شهریور ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 32 -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-32">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">مراحل خلقت و سیر انسان</span>
+            <span class="post-date">چهارشنبه هفتم تیر ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره مؤمنون آیات ۱۲ تا ۱۴ مراحل خلقت انسان را به تفصیل بیان می‌کند:</p>
+          <p class="arabic">وَلَقَدْ خَلَقْنَا الْإِنسَانَ مِن سُلَالَةٍ مِّن طِينٍ ثُمَّ جَعَلْنَاهُ نُطْفَةً فِي قَرَارٍ مَّكِينٍ ثُمَّ خَلَقْنَا النُّطْفَةَ عَلَقَةً فَخَلَقْنَا الْعَلَقَةَ مُضْغَةً فَخَلَقْنَا الْمُضْغَةَ عِظَامًا فَكَسَوْنَا الْعِظَامَ لَحْمًا ثُمَّ أَنشَأْنَاهُ خَلْقًا آخَرَ فَتَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ</p>
+          <h3>مراحل خلقت انسان</h3>
+          <ol>
+            <li><strong>سلاله من طین:</strong> عصاره خاک — اشاره به منشاء مادی انسان</li>
+            <li><strong>نطفه:</strong> نطفه در قرارگاه محکم (رحم)</li>
+            <li><strong>علقه:</strong> خون بسته شده</li>
+            <li><strong>مضغه:</strong> پاره گوشت جویده‌شده</li>
+            <li><strong>عظام:</strong> استخوان‌بندی</li>
+            <li><strong>کسوت لحم:</strong> پوشاندن استخوان با گوشت</li>
+            <li><strong>خلق آخر:</strong> دمیدن روح — مرحله‌ای کاملاً متفاوت که انسان را از حیوان جدا می‌کند</li>
+          </ol>
+          <p>جمله «ثم أنشأناه خلقاً آخر» نشان‌دهنده جهشی کیفی در خلقت است که همه مفسران آن را به دمیدن روح یا پیدایش نفس انسانی تفسیر کرده‌اند.</p>
+          <h3>سیر کمالی انسان پس از خلقت</h3>
+          <p>سوره انشقاق آیه ۱۹: <span class="arabic">لَتَرْكَبُنَّ طَبَقًا عَن طَبَقٍ</span> — از مرحله‌ای به مرحله دیگر. این آیه سیر تکاملی و مراتب وجودی انسان را بیان می‌کند.</p>
+          <div class="post-footer">[+] نوشته شده در چهارشنبه هفتم تیر ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 31 -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-31">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">خلق و امر</span>
+            <span class="post-date">سه‌شنبه بیست و سوم خرداد ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره اعراف آیه ۵۴:</p>
+          <p class="arabic">أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ تَبَارَكَ اللَّهُ رَبُّ الْعَالَمِينَ</p>
+          <p>ترجمه: آگاه باشید که آفرینش و فرمان مخصوص اوست. بزرگوار است خداوند، پروردگار جهانیان.</p>
+          <h3>تفاوت خلق و امر</h3>
+          <p><strong>خلق</strong> عالم ماده است — عالمی که تدریجی، زمان‌مند و مکان‌مند است. <strong>امر</strong> عالم ملکوت است — فوری، بی‌واسطه و فراتر از زمان و مکان. سوره اسراء آیه ۸۵ می‌فرماید: <span class="arabic">وَيَسْأَلُونَكَ عَنِ الرُّوحِ قُلِ الرُّوحُ مِنْ أَمْرِ رَبِّي</span> — روح از عالم امر است، نه از عالم خلق.</p>
+          <p>این تمایز نشان می‌دهد که انسان دو بُعد دارد: بُعد مادی (خلق) و بُعد روحانی (امر). کمال انسان در رشد بُعد روحانی‌اش است.</p>
+          <div class="post-footer">[+] نوشته شده در سه‌شنبه بیست و سوم خرداد ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 30 -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-30">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">تخیّل</span>
+            <span class="post-date">دوشنبه بیست و دوم خرداد ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>تخیّل یکی از قوای ویژه انسانی است که در قرآن به صورت غیرمستقیم بدان اشاره شده است. سوره یس آیه ۸۲:</p>
+          <p class="arabic">إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ</p>
+          <p>خداوند با اراده می‌آفریند. انسان که خلیفه خدا بر زمین است نیز از این ویژگی بهره‌ای دارد — با تخیل می‌تواند آینده را تصویر کند و برای رسیدن به آن تلاش نماید.</p>
+          <h3>تخیّل مثبت و منفی</h3>
+          <ul>
+            <li><strong>تخیل سازنده:</strong> تصویر آینده بهتر، برنامه‌ریزی، خلاقیت</li>
+            <li><strong>تخیل مخرب:</strong> وسوسه، پیروی از هوای نفس، دوری از حقیقت</li>
+          </ul>
+          <p>سوره ناس اشاره به «وسواس خنّاس» دارد که از تخیلات منفی بهره می‌گیرد. پناه به خدا از این وسواس، راه مقابله با تخیلات مخرب است.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه بیست و دوم خرداد ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 29 -->
+    <article class="post-card" data-cat="اخلاق-و-معنوی" id="post-29">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">ندانستن وقت مرگ</span>
+            <span class="post-date">دوشنبه بیست و دوم خرداد ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">اخلاق و معنوی</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>یکی از مفاهیم اساسی در قرآن، عدم آگاهی انسان از زمان مرگ خویش است. سوره لقمان آیه ۳۴:</p>
+          <p class="arabic">وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا وَمَا تَدْرِي نَفْسٌ بِأَيِّ أَرْضٍ تَمُوتُ</p>
+          <p>ترجمه: هیچ‌کس نمی‌داند فردا چه به دست خواهد آورد و هیچ‌کس نمی‌داند در کدام سرزمین خواهد مرد.</p>
+          <h3>حکمت‌های ندانستن وقت مرگ</h3>
+          <ol>
+            <li>آمادگی دائمی — اگر وقت مرگ معلوم بود، انسان تا آخرین لحظه بی‌خیال بود.</li>
+            <li>بهره‌گیری از هر لحظه زندگی به بهترین شکل.</li>
+            <li>پرهیز از از هر لحظه زندگی به بهترین شکل.</li>
+            <li>پرهیز از وجه دائمی به خداوند و حفظ رابطه با او.</li>
+          </ol>
+          <p>سوره منافقون آیه ۱۱: «خداوند هرگز مرگ کسی را به تأخیر نمی‌اندازد وقتی اجلش فرا رسد.» این قانون برای همه یکسان است — مرگ وعده‌ای است که تخلف در آن راه ندارد.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه بیست و دوم خرداد ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 28 -->
+    <article class="post-card" data-cat="اخلاق-و-معنوی" id="post-28">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">ترس از مرگ</span>
+            <span class="post-date">دوشنبه بیست و دوم خرداد ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">اخلاق و معنوی</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره جمعه آیه ۸:</p>
+          <p class="arabic">قُلْ إِنَّ الْمَوْتَ الَّذِي تَفِرُّونَ مِنْهُ فَإِنَّهُ مُلَاقِيكُمْ</p>
+          <p>ترجمکه از آن میکه از آن می‌گریزید قطعاً به سراغتان خواهد آمد.</p>
+          <p>ترس از مرگ طبیعی است اما قرآن می‌خواهد این ترس به آگاهی و آمادگی تبدیل شود نه فرار از واقعیت.</p>
+          <h3>انواع رویکرد انسان به مرگ</h3>
+          <ol>
+            <li><strong>انکار:</strong> نادیده گرفتن مرگ — که قرآن آن را بی‌حاصل می‌داند.</li>
+            <li><strong>ترس فلج‌کننده:</strong> هراس از مرگ که انسان را از زندگی کامل باز می‌دارد.</li>
+            <li><strong>آمادگی آگاهانه:</strong> پذیرش مرگ و آماده شدن برای آن با اعمال نیک — آنچه قرآن توصیه می‌کند.</li>
+          </ol>
+          <p>امیرالمؤمنین علی(ع) فرمودند: «مرگ خود را به یاد داشته باشید چرا که هر که مرگ را فراموش کند، آماده آن نمی‌شود.» آیه ۱۸۵ سوره آل‌عمران: <span class="arabic">كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ</span> — هر نفسی چشنده مرگ است. «ذائقه» به معنی چشیدن است؛ مرگ تجربه‌ای است که همه باید از سر بگذرانند.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه بیست و دوم خرداد ۱۳۹۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 27 -->
+    <article class="post-card" data-cat="خانواده" id="post-27">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">ازدواج برای آرامش</span>
+            <span class="post-date">یکشنبه بیست‌وهفتم فروردین ۱۳۹۱</span>
+          </span>
+          <span class="cat-badge">خانواده</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره روم آیه ۲۱:</p>
+          <p class="arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ ل
+            لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p>
+          <p>ترجمه: از نشانه‌های قدرت‌نمایی خداوند است که برای شما از جنس خودتان همسرانی آفرید تا در کنارشان آرام گیرید و میان شما محبت و شفقتی قرار داد؛ قطعاً در این تدبیر عجیب برای مردمی که می‌اندیشند نشانه‌هاست.</p>
+          <p>هدف از ازدواج رسیدن به آرامش و راحتی است، اما چرا در جامعه کنونی ما برای خیلی‌ها مشکلی بزرگ شده؟ چون ما مقررات اسلام در مورد ازدواج را مراعات ننموده و به جای آن از رسومات غیرمعقول و غیرلازم پیروی کرده‌ایم:</p>
+          <ol>
+            <li>جهیزیه‌های زیاد که گاهی با ناتوانی خانواده آنان را به زحمت می‌اندازد، برای چشم و هم‌چشمی و فخرفروشی‌های موهوم.</li>
+            <li>مهریه‌های سنگین برای محکم کردن ازدواج و بستن دست و پای مرد، مطیع قرار دادن او و به رخ دیگران کشیدن.</li>
+          </ol>
+          <h3>راه نجات</h3>
+          <p>تنها رجوع به سیره اسلام: تهیه جهیزیه‌ای مختصر به اندازه ضرورت، آن هم از طرف مرد، با پرداخت مهریه‌ای که باید نقداً پرداخت گردد. در این صورت به خانواده زن تحمیلی نخواهد بود و مرد هم توقعی بی‌جا نخواهد داشت. ضمناً با پرداخت مهریه نقداً از طرف مرد، جایی برای دعوا و درگیری‌های بعدی نخواهد گذاشت. مهریه هدیه‌ای است از طرف مرد به زن و نسیه بودن آن بی‌معناست — اصلاً عامل سنگینی و زیادی مهریه همان نسیه بودن است.</p>
+          <h3>نشوز مرد</h3>
+          <p>سوره نساء آیه ۱۲۸:</p>
+          <p class="arabic">وَإِنِ امْرَأَةٌ خَافَتْ مِن بَعْلِهَا نُشُوزًا أَوْ إِعْرَاضًا فَلَا جُنَاحَ عَلَيْهِمَا أَن يُصْلِحَا بَيْنَهُمَا صُلْحًا وَالصُّلْحُ خَيْرٌ</p>
+          <p>اگر زنی احساس بی‌میلی و بی‌توجهی از شوهرش نمود، می‌توانند با هم سازش کنند — به این صورت که زن با بخشیدن بعضی حقوق خود برای باقی ماندن بر ازدواج، یا با بذل قسمتی از مهریه برای جدا شدن از او، چاره‌ای بیابند. این سازش بهتر از آن است که زن بدون تکلیف رها شود.</p>
+          <h3>نشوز زن</h3>
+          <p>سوره نساء آیه ۳۴:</p>
+          <p class="arabic">وَاللَّاتِي تَخَافُونَ نُشُوزَهُنَّ فَعِظُوهُنَّ وَاهْجُرُوهُنَّ فِي الْمَضَاجِعِ وَاضْرِبُوهُنَّ فَإِنْ أَطَعْنَكُمْ فَلَا تَبْغُوا عَلَيْهِنَّ سَبِيلًا</p>
+          <p>زنانی که از ناسازگاری آنان بیم دارید: نخست اندرزشان دهید، سپس در بستر از آنان دوری کنید، و اگر سود نداد از باب نهی از منکر و جلوگیری از فساد، آن هم به اندازه‌ای که اثری بر بدن نماند. زدن زن برای هر مسئله‌ای مجاز نیست — فقط در این مورد خاص که احتمال فساد داده شود.</p>
+          <h3>اختلاف زن و شوهر</h3>
+          <p>سوره نساء آیه ۳۵:</p>
+          <p class="arabic">وَإِنْ خِفْتُمْ شِقَاقَ بَيْنِهِمَا فَابْعَثُوا حَكَمًا مِّنْ أَهْلِهِ وَحَكَمًا مِّنْ أَهْلِهَا إِن يُرِيدَا إِصْلَاحًا يُوَفِّقِ اللَّهُ بَيْنَهُمَا</p>
+          <p>اگر از اختلاف آن دو بیم جدایی دارید، داوری از کسان مرد و داوری از کسان زن برانگیزید. تا جایی که ممکن است باید کوشید برای رفع اختلاف و ایجاد تفاهم، و قبل از هر چیز شناخت ریشه واقعی اختلاف.</p>
+          <h3>عوامل اختلاف زن با شوهر</h3>
+          <ol>
+            <li>مهریه سنگین که به نظر شوهر او را اغفال نموده.</li>
+            <li>تحمیلی بودن ازدواج از یک طرف یا هر دو طرف.</li>
+            <li>دخالت‌های بی‌جای دیگران از دو خانواده.</li>
+            <li>شاغل بودن و درآمد داشتن زن و احساس بی‌نیازی به شوهر.</li>
+            <li>نازایی و معلولیت در مرد یا زن که موجب بچه‌دار نشدن باشد.</li>
+            <li>بعضی بیماری‌ها یا موانعی که مرد یا زن نتواند میل جنسی خود را ابراز کند.</li>
+          </ol>
+          <h3>راه نجات</h3>
+          <p>سوره نساء آیه ۱۳۰:</p>
+          <p class="arabic">وَإِن يَتَفَرَّقَا يُغْنِ اللَّهُ كُلًّا مِّن سَعَتِهِ وَكَانَ اللَّهُ وَاسِعًا حَكِيمًا</p>
+          <p>اگر اختلاف قابل اصلاح نبود و زندگی آنان جز ناراحتی نبود، چاره‌ای جز جدا شدن نیست. از این جدا شدن نباید ترسید، چرا که خداوند بی‌نیاز می‌کند هر یک از شما را از سعه رحمتش — شاید برای هر یک فرد مناسب‌تری پیدا شد.</p>
+          <p>در پایان لازم است با توجه به شرایط موجود و مهریه‌های نامعقول، قوانین و مقررات ازدواج بازنگری و اصلاح شود.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۴۶ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 26 — ترس از مرگ -->
+    <article class="post-card" data-cat="اخلاق-و-معنوی" id="post-26">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">ترس از مرگ</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">اخلاق و معنوی</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>ترس از مرگ عوامل مختلفی دارد از جمله:</p>
+          <ol>
+            <li>اینکه نمی‌دانیم کجا می‌رویم — همانند جنینی که مایل به آمدن به دنیا نیست چون نمی‌داند کجا خواهد آمد. شاید از همین رو است که گذشتگان مایل به برگشتن به این دنیا نیستند مگر اینکه <span class="arabic">لَعَلِّي أَعْمَلُ صَالِحًا فِيمَا تَرَكْتُ</span></li>
+            <li>دلبستگی به دنیا و جدا شدن از محبوباتی که انسان را گرفتار آنها نموده — از همسر و فرزند و دارایی‌ها.</li>
+            <li>گاهی ترس از مرگ به خاطر اعمال و رفتار ناشایست و مظالمی است که مرتکب شده؛ راه حل آن توبه است: <span class="arabic">وَإِنِّي لَغَفَّارٌ لِّمَن تَابَ وَآمَنَ وَعَمِلَ صَالِحًا</span></li>
+            <li>به علت عدم اعتقاد به حیات پس از مرگ و قیامت. حضرت علی علیه‌السلام پس از ضربت خوردن فرمود: <em>«فُزتُ وَ رَبِّ الکَعبَه»</em> — به پروردگار کعبه رستگار شدم.</li>
+          </ol>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۴۲ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 25 — ندانستن وقت مرگ -->
+    <article class="post-card" data-cat="اخلاق-و-معنوی" id="post-25">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">ندانستن وقت مرگ</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">اخلاق و معنوی</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>یکی از تفضلات و رحمت‌های الهی این است که انسان وقت مرگ و پایان مدت عمر خود را نمی‌داند؛ چون اگر انسان‌ها وقت مرگ خود را می‌دانستند، زندگی بر ایشان تلخ و ناگوار می‌شد.</p>
+          <p>انسان‌ها اکنون چون از زمان مرگ خود بی‌اطلاعند، به هر کاری و هر مسافرتی اقدام می‌کنند؛ اما اگر می‌دانستند پس از یک سال می‌میرند، هرگز به کار بلندمدت اقدام نمی‌کردند.</p>
+          <p>کسی که از خود مسکنی نداشته و خانه‌ای را مثلاً برای مدت یک سال اجاره می‌کند و می‌داند که پس از یک سال از آن خانه بیرون خواهد رفت، کمتر به آن خانه توجه خواهد داشت. اما لطف خداوند آن است که چون انسان‌ها از مرگ و مدت عمر خود بی‌اطلاعند، به کار و تلاش و امید به زندگی و سازندگی این جهان مشغولند.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۴۱ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 24 — خلق و امر -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-24">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">خلق و امر</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره اعراف آیه ۵۴:</p>
+          <p class="arabic">أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ تَبَارَكَ اللَّهُ رَبُّ الْعَالَمِينَ</p>
+          <p>آگاه باشید که بر او و از اوست آفرینش (جهان محسوس و عالم مادی) و عالم امر (که نامحسوس و از دایره علل و عوامل عادی خارج بوده). قانون علت و معلول در عالم خلق جاری است، اما بعضی از پدیده‌ها و حوادث هستند که علل ظاهری ندارند — داری علل واقعی‌اند اما نه محسوس، بلکه از عالم امر: <span class="arabic">إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ</span></p>
+          <h3>نمونه‌هایی از عالم امر</h3>
+          <ul>
+            <li>باردار شدن همسر نازای حضرت ابراهیم پس از بشارت فرشتگان به اسحق</li>
+            <li>داستان قوم لوط: <span class="arabic">فَلَمَّا جَاءَ أَمْرُنَا جَعَلْنَا عَالِيَهَا سَافِلَهَا</span></li>
+            <li>داستان حضرت مریم و تولد عیسی بدون پدر</li>
+            <li>سخن گفتن حضرت عیسی پس از تولد: <span class="arabic">قَالَ إِنِّي عَبْدُ اللَّهِ آتَانِيَ الْكِتَابَ وَجَعَلَنِي نَبِيًّا</span></li>
+            <li>سخن گفتن خداوند با موسی کلیم‌الله</li>
+          </ul>
+          <h3>تمثّل و تخیّل</h3>
+          <p>فرشته جسم ندارد — گاه تنها یک شخص می‌بیند مثل حضرت مریم، گاه افراد متعددی می‌بینند مثل داستان حضرت ابراهیم، و گاهی حتی ناپاکان مثل قوم لوط می‌بینند. اینها همه از نوع <strong>تمثّل</strong> است، نه تخیّل.</p>
+          <p>فرق تمثّل با تخیّل: تمثّل «المُصوَّر على مثال غيره» است — حضرت مریم جوانی را دید به تصور اینکه او واقعاً انسانی است، در صورتی که او انسانی نبود بلکه مثل و مثال انسان بود. اما در تخیّل صرفاً یک تصور غلط است بدون واقعیت.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۳۹ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 23 — مراحل خلقت و سیر انسان -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-23">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">مراحل خلقت و سیر انسان</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره مؤمنون آیات ۱۲–۱۶:</p>
+          <p class="arabic">وَلَقَدْ خَلَقْنَا الْإِنسَانَ مِن سُلَالَةٍ مِّن طِينٍ ثُمَّ جَعَلْنَاهُ نُطْفَةً فِي قَرَارٍ مَّكِينٍ ثُمَّ خَلَقْنَا النُّطْفَةَ عَلَقَةً فَخَلَقْنَا الْعَلَقَةَ مُضْغَةً فَخَلَقْنَا الْمُضْغَةَ عِظَامًا فَكَسَوْنَا الْعِظَامَ لَحْمًا ثُمَّ أَنشَأْنَاهُ خَلْقًا آخَرَ فَتَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ ثُمَّ إِنَّكُم بَعْدَ ذَلِكَ لَمَيِّتُونَ ثُمَّ إِنَّكُمْ يَوْمَ الْقِيَامَةِ تُبْعَثُونَ</p>
+          <h3>نکته‌های مهم آیه</h3>
+          <ol>
+            <li>«خلقنا» مربوط به عوامل مقرره از طرف خداوند است.</li>
+            <li>«جعلنا» قرار گرفتن نطفه در رحم — یک قانون است.</li>
+            <li>«فکسونا» رویش گوشت بر استخوان‌ها.</li>
+            <li>«أنشأناه خلقاً آخر» — اعجاب‌انگیزترین مرحله؛ دمیدن روح که انسان را از حیوان جدا می‌کند.</li>
+            <li>«قدّرنا بینکم الموت» — این زندگی جای ماندن نیست.</li>
+            <li>مرگ پایان نیست؛ روز قیامت زنده و محشور خواهیم شد.</li>
+            <li>برزخ بین مرگ و بعثت: <span class="arabic">وَمِن وَرَائِهِم بَرْزَخٌ إِلَى يَوْمِ يُبْعَثُونَ</span></li>
+          </ol>
+          <p>سوره واقعه آیات ۶۰–۶۲:</p>
+          <p class="arabic">نَحْنُ قَدَّرْنَا بَيْنَكُمُ الْمَوْتَ وَمَا نَحْنُ بِمَسْبُوقِينَ عَلَى أَن نُّبَدِّلَ أَمْثَالَكُمْ وَنُنشِئَكُمْ فِي مَا لَا تَعْلَمُونَ وَلَقَدْ عَلِمْتُمُ النَّشْأَةَ الْأُولَى فَلَوْلَا تَذَكَّرُونَ</p>
+          <p>همان‌گونه که تبدیل نطفه بی‌مقدار به یک انسان کامل خارج از درک و قدرت انسان است، آینده او نیز خلقی جدید و کاملاً متفاوت خواهد بود.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۳۸ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 22 — حیات زمین، حیات انسان‌ها -->
+    <article class="post-card" data-cat="انسان-و-خلقت" id="post-22">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">حیات زمین، حیات انسان‌ها در زندگی، حیات در قیامت</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">انسان و خلقت</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>سوره فاطر آیه ۹:</p>
+          <p class="arabic">وَاللَّهُ الَّذِي أَرْسَلَ الرِّيَاحَ فَتُثِيرُ سَحَابًا فَسُقْنَاهُ إِلَى بَلَدٍ مَّيِّتٍ فَأَحْيَيْنَا بِهِ الْأَرْضَ بَعْدَ مَوْتِهَا كَذَلِكَ النُّشُورُ</p>
+          <p>در سوره ق آیه ۱۱ پس از بیان آمدن باران: «كَذَلِكَ الْخُرُوجُ» — همین‌گونه است خروج از قبر. و در سوره فصلت آیه ۳۹: <span class="arabic">إِنَّ الَّذِي أَحْيَاهَا لَمُحْيِي الْمَوْتَى</span> — همان کسی که زمین‌های مرده را زنده می‌کند، حتماً مردگان را نیز زنده می‌کند.</p>
+          <h3>حیات انسان‌ها در زندگی دنیا</h3>
+          <p class="arabic">مَنْ عَمِلَ صَالِحًا مِّن ذَكَرٍ أَوْ أُنثَى وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً</p>
+          <p>«حیوه طیّبه» همان آرامش روحی و امید و توکل بر خداوند است. اجر عمل صالح مربوط به آخرت است، اما ثمره آن در همین دنیا نیز چشیده می‌شود. عمل به دستورات الهی همان عمل صالح است که موجب حیات طیّبه در دنیا و اجر جزیل در آخرت می‌باشد.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۳۶ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 21 — ثم الی مرجعکم -->
+    <article class="post-card" data-cat="عقاید" id="post-21">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">ثُمَّ إِلَيَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">عقاید</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>«أُنبئکم» و «نُنبئکم» در بیش از بیست مورد در قرآن آمده است. مثال کشت گندم: کشاورز وقتی دانه گندم را می‌کارد، خوشه‌های آینده را نگاه می‌کند نه نگاه بینندگان را. الدنیا مزرعة الآخرة.</p>
+          <p>سوره کهف آیات ۱۰۳–۱۰۵:</p>
+          <p class="arabic">قُلْ هَلْ نُنَبِّئُكُم بِالْأَخْسَرِينَ أَعْمَالًا الَّذِينَ ضَلَّ سَعْيُهُمْ فِي الْحَيَاةِ الدُّنْيَا وَهُمْ يَحْسَبُونَ أَنَّهُمْ يُحْسِنُونَ صُنْعًا أُولَئِكَ الَّذِينَ كَفَرُوا بِآيَاتِ رَبِّهِمْ وَلِقَائِهِ فَحَبِطَتْ أَعْمَالُهُمْ</p>
+          <p>عمل خیر با نیت خیر، عمل صالح می‌گردد. بزرگ‌ترین حادثه قیامت:</p>
+          <p class="arabic">فَكَشَفْنَا عَنكَ غِطَاءَكَ فَبَصَرُكَ الْيَوْمَ حَدِيدٌ</p>
+          <p class="arabic">وَوَجَدُوا مَا عَمِلُوا حَاضِرًا لَا يُغَادِرُ صَغِيرَةً وَلَا كَبِيرَةً إِلَّا أَحْصَاهَا</p>
+          <h3>جدول چهارگانه اعمال</h3>
+          <ul>
+            <li><strong>کار خدا برای خدا کردن</strong> ← عبادت</li>
+            <li><strong>کار خدا برای غیر خدا کردن</strong> ← ریا و شرک</li>
+            <li><strong>کار غیر خدا برای خدا کردن</strong> ← بی‌حاصل</li>
+            <li><strong>کار غیر خدا برای غیر خدا کردن</strong> ← دنیا</li>
+          </ul>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۳۳ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 20 — الناس موتی و اهل العلم احیاء -->
+    <article class="post-card" data-cat="عقاید" id="post-20">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">الناس موتی و اهل العلم احیاء</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">عقاید</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>«مردم عموماً مرده‌اند و دانشمندان زنده‌اند» — این گفته مربوط به زندگی دنیایی آنهاست نه پس از مرگ. عالم در بین مردم همانند شخص بیداری است که شاهد در خواب بودن دیگران است.</p>
+          <p>سوره انفال آیه ۲۴:</p>
+          <p class="arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَجِيبُوا لِلَّهِ وَلِلرَّسُولِ إِذَا دَعَاكُمْ لِمَا يُحْيِيكُمْ</p>
+          <p>دینداران دین‌ناشناس برای جامعه مضرند. حضرت موسی از خضر خواست: <span class="arabic">تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًا</span> — از آنچه تعلیم یافته‌ای به من بیاموز.</p>
+          <p>در محضر امام صادق علیه‌السلام کسی را تمجید می‌کردند که چقدر نمازهای طولانی می‌خواند. حضرت فرمود: «عقل و آگاهی او چگونه است؟» — فوق کل ذی علم علیم.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۳۰ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 19 — روایات (نقد) -->
+    <article class="post-card" data-cat="عقاید" id="post-19">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">روایات — نقد و بررسی</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">عقاید</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>یکی از ادله شرعی برای احکام و عبادات اسلامی، سنت و روایاتی است که از پیامبر و ائمه علیهم‌السلام به ما رسیده؛ این روایات باید: اولاً دارای سند صحیح و معتبر، ثانیاً از لحاظ متن و محتوی معقول، و ثالثاً بر خلاف حقایق قرآنی نباشند.</p>
+          <p>مرحوم مجلسی اعلی‌الله مقامه در نوشتن بحارالانوار منظورش جمع روایات بوده. به گفته مطلعین از شانزده هزار روایت کافی، نُه هزار آن را ضعیف و غیرقابل‌قبول معرفی نموده‌اند. سفیان ثوری گفته: «سی هزار حدیث به نام جابر و از قول او ساخته شده.»</p>
+          <h3>نمونه روایت مشکوک</h3>
+          <p>روایتی از ابن سعد (مجهول‌الحال) در کافی از قول حضرت امیر نقل شده: «به زودی مردی از فرزندان من در سرزمین خراسان از روی ستم به وسیله سم کشته می‌شود، هم‌نام من... گناهان گذشته و آینده‌اش را خداوند می‌آمرزد.»</p>
+          <p>این روایت پرسش‌های جدی دارد: آیا زیارت امام در زمان حیاتش موجب آمرزش گناهان می‌شد؟ این چه گناهانی است که به این سادگی آمرزیده شود؟ در مفاتیح آمده که نماز جعفر نزد ائمه «در مقابل هر رکعتی ثواب هزار حج و هزار عمره» — آیا این‌گونه مقیاس‌گذاری‌ها معقول است؟</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۲۸ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 18 — قضا و قدر (نسخه ارشیو) -->
+    <article class="post-card" data-cat="عقاید" id="post-18">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">قضا و قدر</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">عقاید</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p><strong>قدر</strong> یعنی اندازه دادن — قانون علت و معلول که در هستی جاری است. <strong>قضا</strong> یعنی تحقق کامل علل و عوامل.</p>
+          <p class="arabic">لَن تَجِدَ لِسُنَّةِ اللَّهِ تَبْدِيلًا</p>
+          <p>سوره نساء آیه ۷۹:</p>
+          <p class="arabic">مَّا أَصَابَكَ مِنْ حَسَنَةٍ فَمِنَ اللَّهِ وَمَا أَصَابَكَ مِن سَيِّئَةٍ فَمِن نَّفْسِكَ</p>
+          <p>سنت‌های الهی و قوانین ژنتیک و علّی از مصادیق قدر الهی‌اند. «یقول الاتفاق جاهل السبب» — تصادف را جاهل از علت می‌گوید. قضا و قدر با اختیار انسان منافات ندارد — علم پیشین خدا، اجبار نیست.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۲۶ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+    <!-- POST 17 — هر حادثه دارای علتی است (نسخه ارشیو) -->
+    <article class="post-card" data-cat="اخلاق-و-معنوی" id="post-17">
+      <details>
+        <summary>
+          <span class="toggle-icon">▶</span>
+          <span class="post-meta">
+            <span class="post-title">هر حادثه و مصیبتی دارای علتی است</span>
+            <span class="post-date">دوشنبه دوم فروردین ۱۳۹۵</span>
+          </span>
+          <span class="cat-badge">اخلاق و معنوی</span>
+        </summary>
+        <div class="post-body">
+          <p><strong>بسم الله الرحمن الرحیم</strong></p>
+          <p>چون در گذشته علت و عوامل بسیاری از حوادث و مصیبت‌ها و هر گونه اتفاقی که علت آن را نمی‌دانستند به خداوند نسبت می‌دادند — «یقول الاتفاق جاهل السبب».</p>
+          <p>سوره انعام:</p>
+          <p class="arabic">وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ وَيَعْلَمُ مَا فِي الْبَرِّ وَالْبَحْرِ وَمَا تَسْقُطُ مِن وَرَقَةٍ إِلَّا يَعْلَمُهَا وَلَا حَبَّةٍ فِي ظُلُمَاتِ الْأَرْضِ وَلَا رَطْبٍ وَلَا يَابِسٍ إِلَّا فِي كِتَابٍ مُّبِينٍ</p>
+          <p>خداوند همه پنهانی‌ها را به علم خود منتسب نموده، نه به خواست خود. با توجه به این مطلب، مسئله مرگ هم از همین مقوله است — هر مرگی علل طبیعی، جسمی و تغذیه‌ای دارد که باید شناخته شود.</p>
+          <div class="post-footer">[+] نوشته شده در دوشنبه دوم فروردین ۱۳۹۵ ساعت ۱۶:۲۳ توسط کاظم | نظر بدهید</div>
+        </div>
+      </details>
+    </article>
+
+  </main>
+
+  <div id="no-results" role="status" aria-live="polite">
+    <p>نتیجه‌ای یافت نشد.</p>
+  </div>
+
+</div><!-- /.page-wrap -->
+
+<script>
+  // ── Progress bar ──
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress-fill').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // ── Build TOC ──
+  const cards = Array.from(document.querySelectorAll('.post-card'));
+  const tocList = document.getElementById('toc-list');
+  cards.forEach(card => {
+    const title = card.querySelector('.post-title')?.textContent || '';
+    const id = card.id;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = title;
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+
+  // ── Filter buttons ──
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      cards.forEach(card => {
+        card.hidden = (cat !== 'all' && card.dataset.cat !== cat);
+      });
+      checkNoResults();
+    });
+  });
+
+  // ── Search ──
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const catOk = activeCat === 'all' || card.dataset.cat === activeCat;
+      card.hidden = !(catOk && (!q || text.includes(q)));
+    });
+    checkNoResults();
+  });
+
+  function checkNoResults() {
+    const visible = cards.some(c => !c.hidden);
+    document.getElementById('no-results').style.display = visible ? 'none' : 'block';
+  }
+</script>
+</body>
+</html>
