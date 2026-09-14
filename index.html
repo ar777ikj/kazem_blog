@@ -1,1 +1,488 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>آینده انسان از نظر قرآن</title>
+  <style>
+    /* ── Tokens ─────────────────────────────────────────── */
+    :root {
+      --bg:          oklch(97% 0.012 150);
+      --surface:     oklch(100% 0      0);
+      --raised:      oklch(93% 0.022 150);
+      --border:      oklch(82% 0.040 155);
+      --accent:      oklch(46% 0.130 155);   /* jade */
+      --accent-soft: oklch(88% 0.060 155);
+      --accent-dark: oklch(34% 0.110 155);
+      --text:        oklch(18% 0.012 150);
+      --muted:       oklch(46% 0.020 150);
+      --gold:        oklch(68% 0.120  75);   /* Quranic verse accent */
+
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+
+      --font-body: "Vazirmatn", "Tahoma", "Arial", sans-serif;
+      --font-arabic: "Amiri", "Traditional Arabic", serif;
+
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:          oklch(14% 0.014 155);
+        --surface:     oklch(18% 0.018 155);
+        --raised:      oklch(22% 0.022 155);
+        --border:      oklch(32% 0.040 155);
+        --accent:      oklch(68% 0.120 155);
+        --accent-soft: oklch(28% 0.060 155);
+        --accent-dark: oklch(78% 0.100 155);
+        --text:        oklch(93% 0.008 150);
+        --muted:       oklch(64% 0.016 150);
+        --gold:        oklch(78% 0.110  75);
+      }
+    }
+
+    /* ── Reset & Base ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.9;
+      min-height: 100vh;
+    }
+
+    /* ── Google Fonts import ────────────────────────────── */
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Amiri:ital@0;1&display=swap');
+
+    /* ── Layout ─────────────────────────────────────────── */
+    .site-header {
+      background: linear-gradient(160deg, var(--accent-dark) 0%, var(--accent) 100%);
+      color: #fff;
+      text-align: center;
+      padding: var(--space-8) var(--space-5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' filth d=ill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .site-header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+
+    .site-header .subtitle {
+      margin-top: var(--space-2);
+      font-size: 1rem;
+      opacity: 0.82;
+      font-weight: 300;
+      position: relative;
+    }
+
+    .site-header .author-badge {
+      display: inline-block;
+      margin-top: var(--space-4);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 999px;
+      padding: var(--space-1) var(--space-4);
+      font-size: 0.875rem;
+      position: relative;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: var(--space-7) var(--space-5);
+    }
+
+    /* ── Table of contents ──────────────────────────────── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-right: 4px solid var(--accent);
+      border-radius: var(--r-md);
+      padding: var(--space-5);
+      margin-bottom: var(--space-7);
+    }
+
+    .toc h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-bottom: var(--space-3);
+    }
+
+    .toc ol {
+      padding-right: var(--space-5);
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+
+    .toc ol li { margin-bottom: var(--space-1); }
+
+    .toc a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 120ms ease;
+    }
+    .toc a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+    /* ── Article / Section ──────────────────────────────── */
+    .article-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--space-6) var(--space-6);
+      margin-bottom: var(--space-6);
+      box-shadow: 0 1px 4px oklch(0% 0 0 / 0.06);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--raised);
+    }
+
+    .section-number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    /* ── Body text ──────────────────────────────────────── */
+    .article-section p {
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      text-align: justify;
+      margin-bottom: var(--space-4);
+    }
+
+    .article-section p:last-child { margin-bottom: 0; }
+
+    /* ── Quranic verse ──────────────────────────────────── */
+    .verse {
+      font-family: var(--font-arabic);
+      font-size: 1.05rem;
+      direction: rtl;
+      text-align: center;
+      background: var(--raised);
+      border-right: 3px solid var(--gold);
+      border-radius: var(--r-sm);
+      padding: var(--space-3) var(--space-4);
+      margin: var(--space-4) 0;
+      color: var(--accent-dark);
+      font-style: italic;
+      line-height: 2.2;
+    }
+
+    .verse cite {
+      display: block;
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 0.8125rem;
+      color: var(--gold);
+      margin-top: var(--space-1);
+    }
+
+    .verse-translation {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: calc(-1 * var(--space-2));
+      margin-bottom: var(--space-4);
+      font-style: italic;
+    }
+
+    /* ── Hadith block ───────────────────────────────────── */
+    .hadith {
+      background: var(--accent-soft);
+      border-radius: var(--r-md);
+      padding: var(--space-4) var(--space-5);
+      margin: var(--space-4) 0;
+      border: 1px solid var(--border);
+    }
+
+    .hadith .hadith-arabic {
+      font-family: var(--font-arabic);
+      font-size: 1rem;
+      direction: rtl;
+      color: var(--accent-dark);
+      line-height: 2.2;
+      margin-bottom: var(--space-2);
+    }
+
+    .hadith .hadith-source {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .hadith .hadith-translation {
+      font-size: 0.9375rem;
+      color: var(--text);
+      margin-top: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--border);
+      line-height: 1.85;
+    }
+
+    /* ── Bismi ──────────────────────────────────────────── */
+    .basmala {
+      text-align: center;
+      font-family: var(--font-arabic);
+      font-size: 1.5rem;
+      color: var(--accent-dark);
+      padding: var(--space-6) 0 var(--space-4);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .site-footer {
+      text-align: center;
+      padding: var(--space-6) var(--space-5);
+      color: var(--muted);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .article-section { padding: var(--space-5) var(--space-4); }
+      main { padding: var(--space-5) var(--space-3); }
+    }
+
+    /* ── Reduced motion ─────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ══════════════════════════════════════════ -->
+  <header class="site-header">
+    <h1>آینده انسان از نظر قرآن</h1>
+    <p class="subtitle">نگاهی قرآنی به سرنوشت و کمال بشر</p>
+    <span class="author-badge">نوشته: آیت‌الله کاظم</span>
+  </header>
+
+  <!-- ══ MAIN ════════════════════════════════════════════ -->
+  <main>
+
+    <!-- فهرست مطالب — بعداً تکمیل می‌شه -->
+    <nav class="toc" aria-label="فهرست مطالب">
+      <h2>فهرست مطالب</h2>
+      <ol>
+        <li><a href="#part-1">مقدمه — شناخت انسان و جایگاه او در هستی</a></li>
+        <!-- بخش‌های ۲ تا ۳۳ پس از دریافت فایل‌ها اضافه می‌شوند -->
+      </ol>
+    </nav>
+
+    <!-- ══ بخش ۱: مقدمه ══════════════════════════════════ -->
+    <article class="article-section" id="part-1">
+
+      <div class="section-header">
+        <span class="section-number">۱</span>
+        <h2 class="section-title">مقدمه — شناخت انسان و جایگاه او در هستی</h2>
+      </div>
+
+      <p class="basmala">بسم الله الرحمن الرحیم</p>
+
+      <p>
+        موجودات سه گونه‌اند: <strong>جمادات</strong> که هیچ‌گونه تحرک و احساس و ادراک ظاهری ندارند؛
+        <strong>نباتات</strong> که دارای نمو، رشد، تغذیه و تولید مثل‌اند اما فاقد شعور و ادراک؛
+        و <strong>حیوانات</strong> که علاوه بر رشد و تغذیه، دارای احساس و غرائز گوناگون‌اند، هرچند
+        فاقد انتخاب و اختیار معقول هستند.
+      </p>
+
+      <p>
+        تفاوت انسان و حیوان در همین جهت است که انتخاب انسان مبتنی بر تعقل و تشخیص خیر و شر است.
+        انسان اگرچه محکوم غرائز حیوانی است، اما با نیروی تعقل — که مرتبه کامل‌تر احساس و ادراک است —
+        قدرت انتخاب راه صحیح را دارد.
+      </p>
+
+      <p>
+        خصوصیات مشترک انسان و حیوان را <strong>غریزه</strong> یا هدایت تکوینی می‌نامند:
+      </p>
+
+      <blockquote class="verse">
+        رَبُّنَا الَّذِي أَعْطَىٰ كُلَّ شَيْءٍ خَلْقَهُ ثُمَّ هَدَىٰ
+        <cite>— سوره طه</cite>
+      </blockquote>
+      <p class="verse-translation">پروردگار ما آفریدگاری است که همه موجودات را آفرید و هر یک را در راه زندگی و کمال راهنمایی نمود.</p>
+
+      <p>
+        اما مختصات انسان را <strong>فطرت</strong> می‌نامند:
+      </p>
+
+      <blockquote class="verse">
+        فِطْرَتَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا
+        <cite>— سوره روم</cite>
+      </blockquote>
+
+      <blockquote class="verse">
+        إِنَّا هَدَيْنَاهُ السَّبِيلَ إِمَّا شَاكِرًا وَإِمَّا كَفُورًا
+        <cite>— سوره دهر (انسان)</cite>
+      </blockquote>
+      <p class="verse-translation">ما انسان را به راه درست راهنمایی کردیم؛ حال خود اوست که شاکر باشد یا ناسپاس.</p>
+
+      <blockquote class="verse">
+        فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَاهَا
+        <cite>— سوره شمس</cite>
+      </blockquote>
+      <p class="verse-translation">ما به انسان راه انحراف و راه پاکی را الهام نمودیم؛ پس انتخاب هر یک از دو راه به اختیار خود اوست.</p>
+
+      <p>
+        انسان نوعی حیوان است، اما تکامل‌یافته‌تر از سایر حیوانات؛ و اگر از عقل و تعلیم صحیح
+        استفاده نکند، <em>«بَل هُم أضَلّ»</em> خواهد بود. خداوند درباره جایگاه والای او می‌فرماید:
+      </p>
+
+      <blockquote class="verse">
+        لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ
+        <cite>— سوره تین، آیه ۴</cite>
+      </blockquote>
+      <p class="verse-translation">ما انسان را در بهترین آراستگی آفریدیم.</p>
+
+      <p>
+        با در نظر گرفتن خصوصیات مغزی و ادراکی، انسان را باید <strong>معجزه کل خلقت</strong> دانست.
+        از این رو در تعریف سنتی، او را «حیوان ناطق» خوانده‌اند؛ نه صرفاً به معنای گویایی، بلکه به
+        اعتبار آن ادراکات والا و مسائل عقلی و معرفتی که خداوند به او آموخت:
+      </p>
+
+      <blockquote class="verse">
+        عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ
+        <cite>— سوره علق</cite>
+      </blockquote>
+      <p class="verse-translation">آموختیم انسان را چیزهایی که نمی‌دانست.</p>
+
+      <p>
+        نتیجه آنکه موجودی زیباتر و عجیب‌تر از انسان نیست، و اگر انسان نبود، کل خلقت عبث و بیهوده بود.
+      </p>
+
+      <hr style="border:none; border-top: 1px solid var(--raised); margin: var(--space-5) 0;" />
+
+      <p>
+        <strong>هدف از آفرینش:</strong> طبق حدیث قدسی منقول از حضرت داود، خداوند فرمود:
+      </p>
+
+      <div class="hadith">
+        <p class="hadith-arabic">
+          كُنتُ كَنزاً مَخفِيّاً فَأَحبَبتُ أَن أُعرَفَ فَخَلَقتُ الخَلقَ لِكَي أُعرَفَ
+          وَخَلَقتُ الأَشياءَ لِأَجلِكَ وَخَلَقتُكَ لِأَجلي
+        </p>
+        <p class="hadith-translation">
+          گنجی پنهان بودم؛ دوست داشتم شناخته شوم، پس مخلوقات را آفریدم تا شناخته شوم؛
+          همه را برای انسان آفریدم و انسان را برای معرفت و شناخت خودم.
+        </p>
+        <p class="hadith-source">— حدیث قدسی</p>
+      </div>
+
+      <p>
+        این تنها انسان است که طاقت و استعداد این معرفت را دارد و با همین امتیاز است که خداوند
+        او را مفتخر به جانشینی خود در زمین قرار داده:
+      </p>
+
+      <blockquote class="verse">
+        وَحَمَلَهَا الْإِنسَانُ ۖ إِنَّهُ كَانَ ظَلُومًا جَهُولًا
+        <cite>— سوره احزاب</cite>
+      </blockquote>
+      <p class="verse-translation">
+        این بار امانت — که همان معرفت‌الله و هدف از خلقت است — انسان با جرأت و جسارتی که دارد
+        پذیرفت؛ هرچند ظلوم و جهول بود.
+      </p>
+
+      <hr style="border:none; border-top: 1px solid var(--raised); margin: var(--space-5) 0;" />
+
+      <p>
+        <strong>عقل: حجت باطنی الهی.</strong> حضرت موسی بن جعفر (ع) به هشام فرمود:
+      </p>
+
+      <div class="hadith">
+        <p class="hadith-arabic">
+          إِنَّ لِلَّهِ عَلَى النَّاسِ حُجَّتَيْنِ: حُجَّةٌ ظَاهِرَةٌ وَحُجَّةٌ بَاطِنَةٌ،
+          فَأَمَّا الظَّاهِرَةُ فَالرُّسُلُ وَالأَنبِيَاءُ وَالأَئِمَّةُ،
+          وَأَمَّا الْبَاطِنَةُ فَالْعُقُولُ.
+        </p>
+        <p class="hadith-translation">
+          همانا خداوند برای انسان‌ها دو حجت (راهنما) قرار داده: حجتی آشکار که همان پیامبران و
+          امامان هستند، و دیگری پنهان که آن عقل‌هاست.
+        </p>
+        <p class="hadith-source">— تحف العقول</p>
+      </div>
+
+      <p>
+        اگر انسان‌ها عقل نداشتند، آمدن پیامبران معنی نداشت؛ و اگر پیامبران نیامده بودند، عقل‌ها
+        به تنهایی به سعادت نمی‌رسیدند. برای تکامل انسان، هر دو بال لازم است.
+      </p>
+
+      <hr style="border:none; border-top: 1px solid var(--raised); margin: var(--space-5) 0;" />
+
+      <p>
+        <strong>عقل ذاتی و عقل اکتسابی:</strong> عقل ذاتی به معنای داشتن مغز و اعصاب سالم است
+        که با رشد جسمی رشد می‌کند — به‌منزله استخری بزرگ که در بدو تولد خالی است:
+      </p>
+
+      <blockquote class="verse">
+        وَاللَّهُ أَخْرَجَكُم مِّن بُطُونِ أُمَّهَاتِكُمْ لَا تَعْلَمُونَ شَيْئًا
+        <cite>— سوره نحل، آیه ۷۸</cite>
+      </blockquote>
+      <p class="verse-translation">خداوند شما را از شکم مادرانتان بیرون آورد در حالی که هیچ نمی‌دانستید.</p>
+
+      <p>
+        این استخر با پرورش و حواس مختلف و علوم گوناگون پر می‌شود و به <strong>عقل اکتسابی</strong>
+        تبدیل می‌گردد. اختلاف تربیت و اطلاعات، موجب اختلاف بینش‌ها و رفتار افراد می‌شود. مرکز همه
+        این ادراکات تنها مغز انسان است — مغزی با ۱۲ تا ۱۵ میلیارد رابطه الکتریکی و پانصد میلیون
+        شبکه ارتباطی — که همه فعالیت‌های جسمی و فکری تحت کنترل اوست.
+      </p>
+
+    </article>
+    <!-- ══ پایان بخش ۱ ══════════════════════════════════ -->
+
+  </main>
+
+  <!-- ══ FOOTER ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <p>نوشته آیت‌الله کاظم &mdash; نهم بهمن ۱۳۸۸</p>
+  </footer>
+
+</body>
+</html>
 
