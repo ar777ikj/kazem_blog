@@ -35,6 +35,46 @@
       --space-8: 64px;
     }
 
+    /* ── Subsection title ───────────────────────────────── */
+    .subsection-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: var(--space-5) 0 var(--space-3);
+    }
+
+    /* ── Section divider ────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--raised);
+      margin: var(--space-5) 0;
+    }
+
+    /* ── Numbered list ──────────────────────────────────── */
+    .numbered-list {
+      padding-right: var(--space-6);
+      margin: var(--space-3) 0 var(--space-4);
+      line-height: 2;
+      color: var(--text);
+    }
+
+    .numbered-list li { margin-bottom: var(--space-2); }
+
+    /* ── Inline Arabic ──────────────────────────────────── */
+    .arabic-inline {
+      font-family: var(--font-arabic);
+      font-size: 1rem;
+      color: var(--accent-dark);
+      direction: rtl;
+    }
+
+    /* ── Conclusion box variant ─────────────────────────── */
+    .conclusion-box {
+      border-right-color: var(--accent);
+      border-right-width: 3px;
+      border-right-style: solid;
+    }
+
     @media (prefers-color-scheme: dark) {
       :root {
         --bg:          oklch(14% 0.014 155);
@@ -48,7 +88,7 @@
         --muted:       oklch(64% 0.016 150);
         --gold:        oklch(78% 0.110  75);
       }
-    }
+  }
 
     /* ── Reset & Base ───────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
