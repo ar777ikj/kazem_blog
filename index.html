@@ -1,235 +1,445 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آینده انسان از نظر قرآن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ── توکن‌های رنگ ─────────────────────────────── */
+  :root {
+    --c-bg:          oklch(97% 0.018 145);   /* سبز روشن خیلی ملایم */
+    --c-surface:     oklch(94% 0.024 148);
+    --c-raised:      oklch(91% 0.030 150);
+    --c-border:      oklch(82% 0.040 150);
+    --c-accent:      oklch(44% 0.120 155);   /* یشمی تیره */
+    --c-accent-soft: oklch(60% 0.090 152);
+    --c-accent-mute: oklch(76% 0.055 150);
+    --c-text:        oklch(18% 0.022 155);
+    --c-muted:       oklch(42% 0.038 152);
+    --c-quran-bg:    oklch(88% 0.045 148);
+    --c-quran-border:oklch(55% 0.100 153);
+    --c-bg: oklch(12% 0.018 145);
+    --c-surface: oklch(16% 0.022 148);
+    --c-raised: oklch(20% 0.028 150);
+    --c-border: oklch(28% 0.035 150);
+    --c-text: oklch(90% 0.018 148);
+    --c-muted: oklch(62% 0.030 152);
+    --c-quran-bg: oklch(18% 0.038 148);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+
+    --font-body:  'Vazirmatn', system-ui, sans-serif;
+    --font-quran: 'Amiri', serif;
+
+    --sidebar-w: 260px;
+  }
+
+  /* ── ریست ────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--c-bg);
+    color: var(--c-text);
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ── هدر ─────────────────────────────────────── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--c-accent);
+    color: oklch(97% 0.015 148);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.14);
+  }
+
+  header h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  header .author {
+    font-size: 0.82rem;
+    opacity: 0.82;
+  }
+
+  /* ── نوار پیشرفت ─────────────────────────────── */
+  #progress {
+    position: fixed;
+    top: 56px;
+    right: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--c-accent-soft);
+    z-index: 99;
+    transition: width 0.1s linear;
+  }
+
+  /* ── چیدمان اصلی ─────────────────────────────── */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-areas: "sidebar main";
+    max-width: 1160px;
+    margin: 0 auto;
+    gap: 0;
+    padding: 2rem 1.5rem;
+    align-items: start;
+  }
+
+  /* ── سایدبار / فهرست ──────────────────────────── */
+  .sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 72px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-accent-mute) transparent;
+  }
+
+  .sidebar h2 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-muted);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .toc {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.36rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+    color: var(--c-muted);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.5;
+  }
+
+  .toc a:hover {
+    background: var(--c-raised);
+    color: var(--c-text);
+  }
+
+  .toc a.active {
+    background: var(--c-accent);
+    color: oklch(97% 0.015 148);
+    font-weight: 500;
+  }
+
+  /* ── محتوای اصلی ─────────────────────────────── */
+  main {
+    grid-area: main;
+    padding-right: 2.5rem;
+    max-width: 740px;
+  }
+
+  /* ── بخش‌ها ──────────────────────────────────── */
+  .section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 72px;
+  }
+
+  .section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--c-accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--c-accent-mute);
+  }
+
+  .section p {
+    margin-bottom: 1rem;
+  }
+
+  /* ── آیه قرآنی ──────────────────────────────── */
+  .quran {
+    font-family: var(--font-quran);
+    font-size: 1.22rem;
+    line-height: 2.2;
+    background: var(--c-qurpx solid var(--c-quran-border));
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem 1.25rem 1rem 1rem;
+    margin: 1.25rem 0;
+    color: oklch(22% 0.040 158);
+  }
+
+  /* ── یادداشت / تذکر ─────────────────────────── */
+  .note {
+    background: var(--c-raised);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    font-size: 0.92rem;
+    color: var(--c-muted);
+    margin: 1rem 0;
+  }
+
+  /* ── نقل‌قول برجسته ──────────────────────────── */
+  .pull {
+    font-size: 1.12rem;
+    font-weight: 500;
+    color: var(--c-accent);
+    border-right: 3px solid var(--c-accent-soft);
+    padding-right: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  /* ── پاورقی‌ها ──────────────────────────────── */
+  .footnotes {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--c-border);
+    font-size: 0.82rem;
+    color: var(--c-muted);
+  }
+
+  /* ── ریسپانسیو ───────────────────────────────── */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "sidebar"
+        "main";
+      padding: 1rem;
+    }
+
+    .sidebar {
+      position: static;
+      max-height: 280px;
+    }
+
+    main {
+      padding-right: 0;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 520px) {
+    html { font-size: 15px; }
+    header h1 { font-size: 0.95rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>آینده انسان از نظر قرآن</h1>
+  <span class="author"><!-- نام نویسنده --></span>
+</header>
+
+<div id="progress"></div>
+
+<div class="layout">
+
+  <!-- فهرست مطالب -->
+  <aside class="sidebar">
+    <h2>فهرست مطالب</h2>
+    <ol class="toc">
+      <li><a href="#s1">بخش ۱</a></li>
+      <li><a href="#s2">بخش ۲</a></li>
+      <li><a href="#s3">بخش ۳</a></li>
+      <li><a href="#s4">بخش ۴</a></li>
+      <li><a href="#s5">بخش ۵</a></li>
+      <li><a href="#s6">بخش ۶</a></li>
+      <li><a href="#s7">بخش ۷</a></li>
+      <li><a href="#s8">بخش ۸</a></li>
+      <li><a href="#s9">بخش ۹</a></li>
+      <li><a href="#s10">بخش ۱۰</a></li>
+      <li><a href="#s11">بخش ۱۱</a></li>
+      <li><a href="#s12">بخش ۱۲</a></li>
+      <li><a href="#s13">بخش ۱۳</a></li>
+      <li><a href="#s14">بخش ۱۴</a></li>
+      <li><a href="#s15">بخش ۱۵</a></li>
+      <li><a href="#s16">بخش ۱۶</a></li>
+      <li><a href="#s17">بخش ۱۷</a></li>
+      <li><a href="#s18">بخش ۱۸</a></li>
+      <li><a href="#s19">بخش ۱۹</a></li>
+      <li><a href="#s20">بخش ۲۰</a></li>
+      <li><a href="#s21">بخش ۲۱</a></li>
+      <li><a href="#s22">بخش ۲۲</a></li>
+      <li><a href="#s23">بخش ۲۳</a></li>
+      <li><a href="#s24">بخش ۲۴</a></li>
+      <li><a href="#s25">بخش ۲۵</a></li>
+      <li><a href="#s26">بخش ۲۶</a></li>
+      <li><a href="#s27">بخش ۲۷</a></li>
+      <li><a href="#s28">بخش ۲۸</a></li>
+      <li><a href="#s29">بخش ۲۹</a></li>
+      <li><a href="#s30">بخش ۳۰</a></li>
+      <li><a href="#s31">بخش ۳۱</a></li>
+      <li><a href="#s32">بخش ۳۲</a></li>
+      <li><a href="#s33">بخش ۳۳</a></li>
+    </ol>
+  </aside>
+
+  <!-- محتوا -->
+  <main>
+    <section id="s1" class="section">
+      <h2><!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آینده انسان از نظر قرآن</title>
-    
-    <!-- فونت‌ها -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
-
     <style>
-        /* ── تنظیمات پایه و رنگ‌ها ─────────────────────── */
-        :root {
-            --c-bg:          oklch(12% 0.018 145);   /* پس‌زمینه تیره */
-            --c-surface:     oklch(16% 0.022 148);  /* پس‌زمینه بخش‌ها */
-            --c-raised:      oklch(20% 0.028 150);
-            --c-border:      oklch(28% 0.035 150);
-            --c-accent:      oklch(44% 0.120 155);   /* یشمی تیره برای تیترها */
-            --c-accent-soft: oklch(60% 0.090 152);
-            --c-accent-mute: oklch(76% 0.055 150);
-            --c-text:        oklch(90% 0.018 148);   /* متن روشن */
-            --c-muted:       oklch(62% 0.030 152);
-            --c-quran-bg:    oklch(18% 0.038 148);
-            --c-quran-border:oklch(55% 0.100 153);
-            
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-
-            --font-body:  'Vazirmatn', system-ui, sans-serif;
-            --font-quran: 'Amiri', serif;
-
-            --sidebar-w: 260px;
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 17px;
-        }
-
         body {
-            font-family: var(--font-body);
-            background: var(--c-bg);
-            color: var(--c-text);
-            line-height: 1.85;
-            min-height: 100vh;
+            background-color: #000000; /* بک‌گراند سیاه برای کل نوشته‌ها */
+            color: #ffffff;
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 1.8;
+            padding: 40px;
         }
-
-        /* ── هدر ─────────────────────────────────────── */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--c-accent);
-            color: white;
-            padding: 0 2rem;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        header h1 { font-size: 1.1rem; }
-
-        /* ── چیدمان اصلی (Layout) ──────────────────────── */
-        .layout {
-            display: grid;
-            grid-template-columns: var(--sidebar-w) 1fr;
-            grid-template-areas: "sidebar main";
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 2rem;
-            padding: 2rem 1.5rem;
-        }
-
-        /* ── سایدبار ─────────────────────────────────── */
-        .sidebar {
-            grid-area: sidebar;
-            position: sticky;
-            top: 72px;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            background: var(--c-surface);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-        }
-
-        .sidebar h2 {
-            font-size: 0.9rem;
-            color: var(--c-accent-soft);
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--c-border);
-            padding-bottom: 0.5rem;
-        }
-
-        .toc { list-style: none; }
-        .toc li { margin-bottom: 5px; }
-        .toc a {
-            text-decoration: none;
-            color: var(--c-muted);
-            font-size: 0.9rem;
-            display: block;
-            padding: 5px 10px;
-            border-radius: var(--radius-sm);
-            transition: 0.3s;
-        }
-        .toc a:hover, .toc a.active {
-            background: var(--c-accent);
-            color: white;
-        }
-
-        /* ── محتوای اصلی ─────────────────────────────── */
-        main {
-            grid-area: main;
-            max-width: 850px;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--c-border);
-        }
-
-        .section h2 {
-            font-size: 1.8rem;
-            color: var(--c-accent);
-            margin-bottom: 1.5rem;
-        }
-
-        .quran {
-            font-family: var(--font-quran);
-            font-size: 1.5rem;
-            background: var(--c-quran-bg);
-            color: var(--c-text);
-            padding: 1.5rem;
-            border-right: 6px solid var(--c-accent);
-            border-radius: var(--radius-md);
-            margin: 2rem 0;
+        h2 {
+            background-color: #00695c; /* سبز یشمی تیره برای عناوین */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            line-height: 2.2;
         }
-
-        .note {
-            background: var(--c-raised);
-            border-right: 4px solid var(--c-accent-mute);
-            padding: 1rem;
-            font-size: 0.95rem;
-            margin: 1.5rem 0;
-            color: var(--c-muted);
+        .quran-quote {
+            background-color: #e0f2f1; /* سبز روشن برای آیات */
+            color: #004d40;
+            padding: 20px;
+            border-right: 5px solid #00695c;
+            margin: 20px 0;
+            font-weight: bold;
         }
-
-        /* ── ریسپانسیو (اصلاح موبایل) ────────────────────── */
-        @media (max-width: 768px) {
-            .layout {
-                grid-template-columns: 1fr; /* سایدبار به بالا یا پایین می‌رود */
-                grid-template-areas: "sidebar" "main";
-                padding: 1rem;
-            }
-
-            .sidebar {
-                position: static; /* سایدبار دیگر چسبیده نیست */
-                max-height: none;
-                margin-bottom: 2rem;
-            }
-
-            main {
-                padding-right: 0;
-            }
-
-            header h1 {
-                font-size: 1rem;
-            }
-
-            .quran {
-                font-size: 1.2rem;
-            }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>آینده انسان از نظر قرآن</h1>
-    <span class="author">نویسنده: ...</span>
-</header>
+    <<<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #000000; /* بک‌گراند سیاه برای کل نوشته‌ها */
+            color: #ffffff;
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 1.8;
+            padding: 40px;
+        }
+        h2 {
+            background-color: #004d40; /* تغییر به سبز یشمی تیره */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .quran-quote {
+            background-color: #e0f2f1; /* سبز روشن برای آیات */
+            color: #004d40;
+            padding: 20px;
+            border-right: 5px solid #00695c;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>آینده انسان از نظر قرآن</title>
+    <style>
+        :root {
+            --primary-color: #00695c; /* سبز یشمی تیره برای تیترها */
+            --bg-color: #f4f7f6;     /* پس‌زمینه بسیار روشن و آرام */
+            --text-color: #263238;   /* خاکستری تیره برای متن اصلی */
+            --accent-color: #004d40; /* یشمی بسیار تیره */
+            --box-bg: #ffffff;       /* پس‌زمینه سفید برای باکس‌های متن */
+        }
 
-<div class="layout">
-    <!-- سایدبار / فهرست مطالب -->
-    <aside class="sidebar">
-        <h2>فهرست مطالب</h2>
-        <nav>
-            <ul class="toc">
-                <li><a href="#s1">بخش ۱</a></li>
-                <li><a href="#s2">بخش ۲</a></li>
-                <li><a href="#s3">بخش ۳</a></li>
-                <!-- سایر بخش‌ها را اینجا اضافه کنید -->
-            </ul>
-        </nav>
-    </aside>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            line-height: 2;
+            margin: 0;
+            padding: 20px;
+        }
 
-    <!-- محتوای اصلی -->
-    <main>
-        <section id="s1" class="section">
-            <h2>بخش ۱: مقدمه</h2>
-            <p>متن بخش اول در اینجا قرار می‌گیرد. این متن به صورت خودکار با عرض صفحه هماهنگ می‌شود.</p>
-            
-            <div class="quran">
-                «...آیه‌ای از قرآن کریم در اینجا قرار می‌گیرد...»
-            </div>
-            
-            <div class="note">
-                این یک یادداشت یا توضیح تکمیلی در مورد متن بالا است.
-            </div>
-        </section>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--box-bg);
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
 
-        <section id="s2" class="section">
-            <h2>بخش ۲: بررسی موضوع</h2>
-            <p>ادامه متن و تحلیل‌ها در این قسمت قرار می‌گیرد.</p>
-        </section>
+        h2 {
+            color: var(--primary-color);
+            border-right: 5px solid var(--primary-color);
+            padding-right: 15px;
+            margin-top: 40px;
+            font-size: 1.6em;
+        }
 
-        <!-- سایر بخش‌ها را به همین ترتیب اضافه کنید -->
-    </main>
-</div>
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
 
-</body>
-</html>
+        .quran-quote {
+            background-color: #e0f2f1; /* سبز بسیار روشن برای آیات */
+            color: #004d40;
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 5px solid var(--primary-color);
+            margin: 25px 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
 <div class="container">
   <!DOCTYPE html>
