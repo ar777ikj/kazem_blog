@@ -1,715 +1,1083 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>آینده انسان از نظر قرآن</title>
-  <style>
-    /* ── Tokens ─────────────────────────────────────────── */
-    :root {
-      --bg:          oklch(97% 0.012 150);
-      --surface:     oklch(100% 0      0);
-      --raised:      oklch(93% 0.022 150);
-      --border:      oklch(82% 0.040 155);
-      --accent:      oklch(46% 0.130 155);   /* jade */
-      --accent-soft: oklch(88% 0.060 155);
-      --accent-dark: oklch(34% 0.110 155);
-      --text:        oklch(18% 0.012 150);
-      --muted:       oklch(46% 0.020 150);
-      --gold:        oklch(68% 0.120  75);   /* Quranic verse accent */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آینده انسان از نظر قرآن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ── توکن‌های رنگ ─────────────────────────────── */
+  :root {
+    --c-bg:          oklch(97% 0.018 145);   /* سبز روشن خیلی ملایم */
+    --c-surface:     oklch(94% 0.024 148);
+    --c-raised:      oklch(91% 0.030 150);
+    --c-border:      oklch(82% 0.040 150);
+    --c-accent:      oklch(44% 0.120 155);   /* یشمی تیره */
+    --c-accent-soft: oklch(60% 0.090 152);
+    --c-accent-mute: oklch(76% 0.055 150);
+    --c-text:        oklch(18% 0.022 155);
+    --c-muted:       oklch(42% 0.038 152);
+    --c-quran-bg:    oklch(88% 0.045 148);
+    --c-quran-border:oklch(55% 0.100 153);
+    --c-bg: oklch(12% 0.018 145);
+    --c-surface: oklch(16% 0.022 148);
+    --c-raised: oklch(20% 0.028 150);
+    --c-border: oklch(28% 0.035 150);
+    --c-text: oklch(90% 0.018 148);
+    --c-muted: oklch(62% 0.030 152);
+    --c-quran-bg: oklch(18% 0.038 148);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
 
-      --r-sm: 6px;
-      --r-md: 12px;
-      --r-lg: 20px;
+    --font-body:  'Vazirmatn', system-ui, sans-serif;
+    --font-quran: 'Amiri', serif;
 
-      --font-body: "Vazirmatn", "Tahoma", "Arial", sans-serif;
-      --font-arabic: "Amiri", "Traditional Arabic", serif;
-
-      --space-1:  4px;
-      --space-2:  8px;
-      --space-3: 12px;
-      --space-4: 16px;
-      --space-5: 24px;
-      --space-6: 32px;
-      --space-7: 48px;
-      --space-8: 64px;
-    }
-
-    /* ── Subsection title ───────────────────────────────── */
-    .subsection-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin: var(--space-5) 0 var(--space-3);
-    }
-
-    /* ── Section divider ────────────────────────────────── */
-    .section-divider {
-      border: none;
-      border-top: 1px solid var(--raised);
-      margin: var(--space-5) 0;
-    }
-
-    /* ── Numbered list ──────────────────────────────────── */
-    .numbered-list {
-      padding-right: var(--space-6);
-      margin: var(--space-3) 0 var(--space-4);
-      line-height: 2;
-      color: var(--text);
-    }
-
-    .numbered-list li { margin-bottom: var(--space-2); }
-
-    /* ── Inline Arabic ──────────────────────────────────── */
-    .arabic-inline {
-      font-family: var(--font-arabic);
-      font-size: 1rem;
-      color: var(--accent-dark);
-      direction: rtl;
-    }
-
-    /* ── Conclusion box variant ─────────────────────────── */
-    .conclusion-box {
-      border-right-color: var(--accent);
-      border-right-width: 3px;
-      border-right-style: solid;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:          oklch(14% 0.014 155);
-        --surface:     oklch(18% 0.018 155);
-        --raised:      oklch(22% 0.022 155);
-        --border:      oklch(32% 0.040 155);
-        --accent:      oklch(68% 0.120 155);
-        --accent-soft: oklch(28% 0.060 155);
-        --accent-dark: oklch(78% 0.100 155);
-        --text:        oklch(93% 0.008 150);
-        --muted:       oklch(64% 0.016 150);
-        --gold:        oklch(78% 0.110  75);
-      }
+    --sidebar-w: 260px;
   }
 
-    /* ── Reset & Base ───────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ── ریست ────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { font-size: 16px; scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.9;
-      min-height: 100vh;
+  body {
+    font-family: var(--font-body);
+    background: var(--c-bg);
+    color: var(--c-text);
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ── هدر ─────────────────────────────────────── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--c-accent);
+    color: oklch(97% 0.015 148);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.14);
+  }
+
+  header h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  header .author {
+    font-size: 0.82rem;
+    opacity: 0.82;
+  }
+
+  /* ── نوار پیشرفت ─────────────────────────────── */
+  #progress {
+    position: fixed;
+    top: 56px;
+    right: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--c-accent-soft);
+    z-index: 99;
+    transition: width 0.1s linear;
+  }
+
+  /* ── چیدمان اصلی ─────────────────────────────── */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-areas: "sidebar main";
+    max-width: 1160px;
+    margin: 0 auto;
+    gap: 0;
+    padding: 2rem 1.5rem;
+    align-items: start;
+  }
+
+  /* ── سایدبار / فهرست ──────────────────────────── */
+  .sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 72px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-accent-mute) transparent;
+  }
+
+  .sidebar h2 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-muted);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .toc {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.36rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+    color: var(--c-muted);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.5;
+  }
+
+  .toc a:hover {
+    background: var(--c-raised);
+    color: var(--c-text);
+  }
+
+  .toc a.active {
+    background: var(--c-accent);
+    color: oklch(97% 0.015 148);
+    font-weight: 500;
+  }
+
+  /* ── محتوای اصلی ─────────────────────────────── */
+  main {
+    grid-area: main;
+    padding-right: 2.5rem;
+    max-width: 740px;
+  }
+
+  /* ── بخش‌ها ──────────────────────────────────── */
+  .section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 72px;
+  }
+
+  .section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--c-accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--c-accent-mute);
+  }
+
+  .section p {
+    margin-bottom: 1rem;
+  }
+
+  /* ── آیه قرآنی ──────────────────────────────── */
+  .quran {
+    font-family: var(--font-quran);
+    font-size: 1.22rem;
+    line-height: 2.2;
+    background: var(--c-qurpx solid var(--c-quran-border));
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem 1.25rem 1rem 1rem;
+    margin: 1.25rem 0;
+    color: oklch(22% 0.040 158);
+  }
+
+  /* ── یادداشت / تذکر ─────────────────────────── */
+  .note {
+    background: var(--c-raised);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    font-size: 0.92rem;
+    color: var(--c-muted);
+    margin: 1rem 0;
+  }
+
+  /* ── نقل‌قول برجسته ──────────────────────────── */
+  .pull {
+    font-size: 1.12rem;
+    font-weight: 500;
+    color: var(--c-accent);
+    border-right: 3px solid var(--c-accent-soft);
+    padding-right: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  /* ── پاورقی‌ها ──────────────────────────────── */
+  .footnotes {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--c-border);
+    font-size: 0.82rem;
+    color: var(--c-muted);
+  }
+
+  /* ── ریسپانسیو ───────────────────────────────── */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "sidebar"
+        "main";
+      padding: 1rem;
     }
 
-    /* ── Google Fonts import ────────────────────────────── */
-    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Amiri:ital@0;1&display=swap');
-
-    /* ── Layout ─────────────────────────────────────────── */
-    .site-header {
-      background: linear-gradient(160deg, var(--accent-dark) 0%, var(--accent) 100%);
-      color: #fff;
-      text-align: center;
-      padding: var(--space-8) var(--space-5);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .site-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' filth d=ill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .site-header h1 {
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      position: relative;
-    }
-
-    .site-header .subtitle {
-      margin-top: var(--space-2);
-      font-size: 1rem;
-      opacity: 0.82;
-      font-weight: 300;
-      position: relative;
-    }
-
-    .site-header .author-badge {
-      display: inline-block;
-      margin-top: var(--space-4);
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.30);
-      border-radius: 999px;
-      padding: var(--space-1) var(--space-4);
-      font-size: 0.875rem;
-      position: relative;
+    .sidebar {
+      position: static;
+      max-height: 280px;
     }
 
     main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: var(--space-7) var(--space-5);
+      padding-right: 0;
+      max-width: 100%;
     }
+  }
 
-    /* ── Table of contents ──────────────────────────────── */
-    .toc {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-right: 4px solid var(--accent);
-      border-radius: var(--r-md);
-      padding: var(--space-5);
-      margin-bottom: var(--space-7);
-    }
+  @media (max-width: 520px) {
+    html { font-size: 15px; }
+    header h1 { font-size: 0.95rem; }
+  }
 
-    .toc h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--accent-dark);
-      margin-bottom: var(--space-3);
-    }
-
-    .toc ol {
-      padding-right: var(--space-5);
-      color: var(--muted);
-      font-size: 0.9375rem;
-    }
-
-    .toc ol li { margin-bottom: var(--space-1); }
-
-    .toc a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 120ms ease;
-    }
-    .toc a:hover { color: var(--accent-dark); text-decoration: underline; }
-
-    /* ── Article / Section ──────────────────────────────── */
-    .article-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: var(--space-6) var(--space-6);
-      margin-bottom: var(--space-6);
-      box-shadow: 0 1px 4px oklch(0% 0 0 / 0.06);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      margin-bottom: var(--space-5);
-      padding-bottom: var(--space-4);
-      border-bottom: 1px solid var(--raised);
-    }
-
-    .section-number {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 0.875rem;
-      font-weight: 700;
-    }
-
-    .section-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent-dark);
-    }
-
-    /* ── Body text ──────────────────────────────────────── */
-    .article-section p {
-      font-size: 1rem;
-      line-height: 2;
-      color: var(--text);
-      text-align: justify;
-      margin-bottom: var(--space-4);
-    }
-
-    .article-section p:last-child { margin-bottom: 0; }
-
-    /* ── Quranic verse ──────────────────────────────────── */
-    .verse {
-      font-family: var(--font-arabic);
-      font-size: 1.05rem;
-      direction: rtl;
-      text-align: center;
-      background: var(--raised);
-      border-right: 3px solid var(--gold);
-      border-radius: var(--r-sm);
-      padding: var(--space-3) var(--space-4);
-      margin: var(--space-4) 0;
-      color: var(--accent-dark);
-      font-style: italic;
-      line-height: 2.2;
-    }
-
-    .verse cite {
-      display: block;
-      font-family: var(--font-body);
-      font-style: normal;
-      font-size: 0.8125rem;
-      color: var(--gold);
-      margin-top: var(--space-1);
-    }
-
-    .verse-translation {
-      font-size: 0.9375rem;
-      color: var(--muted);
-      text-align: center;
-      margin-top: calc(-1 * var(--space-2));
-      margin-bottom: var(--space-4);
-      font-style: italic;
-    }
-
-    /* ── Hadith block ───────────────────────────────────── */
-    .hadith {
-      background: var(--accent-soft);
-      border-radius: var(--r-md);
-      padding: var(--space-4) var(--space-5);
-      margin: var(--space-4) 0;
-      border: 1px solid var(--border);
-    }
-
-    .hadith .hadith-arabic {
-      font-family: var(--font-arabic);
-      font-size: 1rem;
-      direction: rtl;
-      color: var(--accent-dark);
-      line-height: 2.2;
-      margin-bottom: var(--space-2);
-    }
-
-    .hadith .hadith-source {
-      font-size: 0.8125rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .hadith .hadith-translation {
-      font-size: 0.9375rem;
-      color: var(--text);
-      margin-top: var(--space-2);
-      padding-top: var(--space-2);
-      border-top: 1px solid var(--border);
-      line-height: 1.85;
-    }
-
-    /* ── Bismi ──────────────────────────────────────────── */
-    .basmala {
-      text-align: center;
-      font-family: var(--font-arabic);
-      font-size: 1.5rem;
-      color: var(--accent-dark);
-      padding: var(--space-6) 0 var(--space-4);
-      letter-spacing: 0.03em;
-    }
-
-    /* ── Footer ─────────────────────────────────────────── */
-    .site-footer {
-      text-align: center;
-      padding: var(--space-6) var(--space-5);
-      color: var(--muted);
-      font-size: 0.875rem;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── Responsive ─────────────────────────────────────── */
-    @media (max-width: 600px) {
-      .article-section { padding: var(--space-5) var(--space-4); }
-      main { padding: var(--space-5) var(--space-3); }
-    }
-
-    /* ── Reduced motion ─────────────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ══ HEADER ══════════════════════════════════════════ -->
-  <header class="site-header">
-    <h1>آینده انسان از نظر قرآن</h1>
-    <p class="subtitle">نگاهی قرآنی به سرنوشت و کمال بشر</p>
-    <span class="author-badge">نوشته: کاظم ریاضی</span>
-  </header>
+<header>
+  <h1>آینده انسان از نظر قرآن</h1>
+  <span class="author"><!-- نام نویسنده --></span>
+</header>
 
-  <!-- ══ MAIN ════════════════════════════════════════════ -->
+<div id="progress"></div>
+
+<div class="layout">
+
+  <!-- فهرست مطالب -->
+  <aside class="sidebar">
+    <h2>فهرست مطالب</h2>
+    <ol class="toc">
+      <li><a href="#s1">بخش ۱</a></li>
+      <li><a href="#s2">بخش ۲</a></li>
+      <li><a href="#s3">بخش ۳</a></li>
+      <li><a href="#s4">بخش ۴</a></li>
+      <li><a href="#s5">بخش ۵</a></li>
+      <li><a href="#s6">بخش ۶</a></li>
+      <li><a href="#s7">بخش ۷</a></li>
+      <li><a href="#s8">بخش ۸</a></li>
+      <li><a href="#s9">بخش ۹</a></li>
+      <li><a href="#s10">بخش ۱۰</a></li>
+      <li><a href="#s11">بخش ۱۱</a></li>
+      <li><a href="#s12">بخش ۱۲</a></li>
+      <li><a href="#s13">بخش ۱۳</a></li>
+      <li><a href="#s14">بخش ۱۴</a></li>
+      <li><a href="#s15">بخش ۱۵</a></li>
+      <li><a href="#s16">بخش ۱۶</a></li>
+      <li><a href="#s17">بخش ۱۷</a></li>
+      <li><a href="#s18">بخش ۱۸</a></li>
+      <li><a href="#s19">بخش ۱۹</a></li>
+      <li><a href="#s20">بخش ۲۰</a></li>
+      <li><a href="#s21">بخش ۲۱</a></li>
+      <li><a href="#s22">بخش ۲۲</a></li>
+      <li><a href="#s23">بخش ۲۳</a></li>
+      <li><a href="#s24">بخش ۲۴</a></li>
+      <li><a href="#s25">بخش ۲۵</a></li>
+      <li><a href="#s26">بخش ۲۶</a></li>
+      <li><a href="#s27">بخش ۲۷</a></li>
+      <li><a href="#s28">بخش ۲۸</a></li>
+      <li><a href="#s29">بخش ۲۹</a></li>
+      <li><a href="#s30">بخش ۳۰</a></li>
+      <li><a href="#s31">بخش ۳۱</a></li>
+      <li><a href="#s32">بخش ۳۲</a></li>
+      <li><a href="#s33">بخش ۳۳</a></li>
+    </ol>
+  </aside>
+
+  <!-- محتوا -->
   <main>
+    <section id="s1" class="section">
+      <h2><!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #000000; /* بک‌گراند سیاه برای کل نوشته‌ها */
+            color: #ffffff;
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 1.8;
+            padding: 40px;
+        }
+        h2 {
+            background-color: #00695c; /* سبز یشمی تیره برای عناوین */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .quran-quote {
+            background-color: #e0f2f1; /* سبز روشن برای آیات */
+            color: #004d40;
+            padding: 20px;
+            border-right: 5px solid #00695c;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
 
-    <!-- فهرست مطالب — بعداً تکمیل می‌شه -->
-    <nav class="toc" aria-label="فهرست مطالب">
-      <h2>فهرست مطالب</h2>
-      <ol>
-        <li><a href="#part-1">مقدمه — شناخت انسان و جایگاه او در هستی</a></li>
-        <li><a href="#part-2">بررسی آیاتی که به برزخ استشهاد شده</a></li>
-        <!-- بخش‌های ۲ تا ۳۳ پس از دریافت فایل‌ها اضافه می‌شوند -->
-      </ol>
-    </nav>
+    <<<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #000000; /* بک‌گراند سیاه برای کل نوشته‌ها */
+            color: #ffffff;
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 1.8;
+            padding: 40px;
+        }
+        h2 {
+            background-color: #004d40; /* تغییر به سبز یشمی تیره */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .quran-quote {
+            background-color: #e0f2f1; /* سبز روشن برای آیات */
+            color: #004d40;
+            padding: 20px;
+            border-right: 5px solid #00695c;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>آینده انسان از نظر قرآن</title>
+    <style>
+        :root {
+            --primary-color: #00695c; /* سبز یشمی تیره برای تیترها */
+            --bg-color: #f4f7f6;     /* پس‌زمینه بسیار روشن و آرام */
+            --text-color: #263238;   /* خاکستری تیره برای متن اصلی */
+            --accent-color: #004d40; /* یشمی بسیار تیره */
+            --box-bg: #ffffff;       /* پس‌زمینه سفید برای باکس‌های متن */
+        }
 
-    <!-- ══ بخش ۱: مقدمه ══════════════════════════════════ -->
-    <article class="article-section" id="part-1">
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            line-height: 2;
+            margin: 0;
+            padding: 20px;
+        }
 
-      <div class="section-header">
-        <span class="section-number">۱</span>
-        <h2 class="section-title">مقدمه — شناخت انسان و جایگاه او در هستی</h2>
-      </div>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--box-bg);
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
 
-      <p class="basmala">بسم الله الرحمن الرحیم</p>
+        h2 {
+            color: var(--primary-color);
+            border-right: 5px solid var(--primary-color);
+            padding-right: 15px;
+            margin-top: 40px;
+            font-size: 1.6em;
+        }
 
-      <p>
-        موجودات سه گونه‌اند: <strong>جمادات</strong> که هیچ‌گونه تحرک و احساس و ادراک ظاهری ندارند؛
-        <strong>نباتات</strong> که دارای نمو، رشد، تغذیه و تولید مثل‌اند اما فاقد شعور و ادراک؛
-        و <strong>حیوانات</strong> که علاوه بر رشد و تغذیه، دارای احساس و غرائز گوناگون‌اند، هرچند
-        فاقد انتخاب و اختیار معقول هستند.
-      </p>
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
 
-      <p>
-        تفاوت انسان و حیوان در همین جهت است که انتخاب انسان مبتنی بر تعقل و تشخیص خیر و شر است.
-        انسان اگرچه محکوم غرائز حیوانی است، اما با نیروی تعقل — که مرتبه کامل‌تر احساس و ادراک است —
-        قدرت انتخاب راه صحیح را دارد.
-      </p>
+        .quran-quote {
+            background-color: #e0f2f1; /* سبز بسیار روشن برای آیات */
+            color: #004d40;
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 5px solid var(--primary-color);
+            margin: 25px 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-      <p>
-        خصوصیات مشترک انسان و حیوان را <strong>غریزه</strong> یا هدایت تکوینی می‌نامند:
-      </p>
+<div class="container">
+  <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>آینده انسان از نظر قرآن</title>
+    <style>
+        /* استایل پایه مطابق با تم وبلاگ شما */
+        body {
+            background-color: #e0e0e0; /* رنگ پس‌زمینه کلی وبلاگ */
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 2;
+            margin: 0;
+            padding: 20px;
+        }
 
-      <blockquote class="verse">
-        رَبُّنَا الَّذِي أَعْطَىٰ كُلَّ شَيْءٍ خَلْقَهُ ثُمَّ هَدَىٰ
-        <cite>— سوره طه</cite>
-      </blockquote>
-      <p class="verse-translation">پروردگار ما آفریدگاری است که همه موجودات را آفرید و هر یک را در راه زندگی و کمال راهنمایی نمود.</p>
+        /* باکس اصلی پست که روی پس‌زمینه قرار می‌گیرد */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff; /* پس‌زمینه سفید برای خوانایی متن */
+            padding: 40px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
 
-      <p>
-        اما مختصات انسان را <strong>فطرت</strong> می‌نامند:
-      </p>
+        h1 {
+            color: #004d40;
+            text-align: center;
+        }
 
-      <blockquote class="verse">
-        فِطْرَتَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا
-        <cite>— سوره روم</cite>
-      </blockquote>
+        h2 {
+            color: #004d40; /* سبز یشمی تیره */
+            border-bottom: 2px solid #004d40;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 1.4em;
+        }
 
-      <blockquote class="verse">
-        إِنَّا هَدَيْنَاهُ السَّبِيلَ إِمَّا شَاكِرًا وَإِمَّا كَفُورًا
-        <cite>— سوره دهر (انسان)</cite>
-      </blockquote>
-      <p class="verse-translation">ما انسان را به راه درست راهنمایی کردیم؛ حال خود اوست که شاکر باشد یا ناسپاس.</p>
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
 
-      <blockquote class="verse">
-        فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَاهَا
-        <cite>— سوره شمس</cite>
-      </blockquote>
-      <p class="verse-translation">ما به انسان راه انحراف و راه پاکی را الهام نمودیم؛ پس انتخاب هر یک از دو راه به اختیار خود اوست.</p>
+        /* باکس آیات */
+        .quran-quote {
+            background-color: #f1f8e9; /* سبز بسیار روشن برای تمایز آیات */
+            color: #004d40;
+            padding: 15px;
+            border-right: 5px solid #004d40;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-      <p>
-        انسان نوعی حیوان است، اما تکامل‌یافته‌تر از سایر حیوانات؛ و اگر از عقل و تعلیم صحیح
-        استفاده نکند، <em>«بَل هُم أضَلّ»</em> خواهد بود. خداوند درباره جایگاه والای او می‌فرماید:
-      </p>
+<div class="container">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>آینده انسان از نظر قرآن</title>
+    <style>
+        /* استایل تم تیره */
+        body {
+            background-color: #121212; /* پس‌زمینه تیره کل صفحه */
+            color: #ffffff; /* متن سفید */
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 2;
+            margin: 0;
+            padding: 20px;
+        }
 
-      <blockquote class="verse">
-        لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ
-        <cite>— سوره تین، آیه ۴</cite>
-      </blockquote>
-      <p class="verse-translation">ما انسان را در بهترین آراستگی آفریدیم.</p>
+        /* باکس اصلی پست */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e1e1e; /* پس‌زمینه باکس کمی روشن‌تر از بدنه برای تفکیک */
+            padding: 40px;
+            border: 1px solid #333;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
 
-      <p>
-        با در نظر گرفتن خصوصیات مغزی و ادراکی، انسان را باید <strong>معجزه کل خلقت</strong> دانست.
-        از این رو در تعریف سنتی، او را «حیوان ناطق» خوانده‌اند؛ نه صرفاً به معنای گویایی، بلکه به
-        اعتبار آن ادراکات والا و مسائل عقلی و معرفتی که خداوند به او آموخت:
-      </p>
+        h1 {
+            color: #80cbc4; /* سبز یشمی روشن برای هماهنگی با تم تیره */
+            text-align: center;
+        }
 
-      <blockquote class="verse">
-        عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ
-        <cite>— سوره علق</cite>
-      </blockquote>
-      <p class="verse-translation">آموختیم انسان را چیزهایی که نمی‌دانست.</p>
+        h2 {
+            color: #80cbc4; /* سبز یشمی روشن برای تیترها */
+            border-bottom: 2px solid #80cbc4;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 1.4em;
+        }
 
-      <p>
-        نتیجه آنکه موجودی زیباتر و عجیب‌تر از انسان نیست، و اگر انسان نبود، کل خلقت عبث و بیهوده بود.
-      </p>
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
 
-      <hr style="border:none; border-top: 1px solid var(--raised); margin: var(--space-5) 0;" />
+        /* باکس آیات */
+        .quran-quote {
+            background-color: #004d40; /* سبز یشمی تیره برای پس‌زمینه آیه */
+            color: #e0f2f1; /* متن آیه با رنگ روشن */
+            padding: 15px;
+            border-right: 5px solid #80cbc4;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-      <p>
-        <strong>هدف از آفرینش:</strong> طبق حدیث قدسی منقول از حضرت داود، خداوند فرمود:
-      </p>
+<div class="container">
+ <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>آینده انسان از نظر قرآن</title>
+    <style>
+        /* استایل کلی تم تیره */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+            line-height: 2.2;
+            margin: 0;
+            padding: 20px;
+        }
 
-      <div class="hadith">
-        <p class="hadith-arabic">
-          كُنتُ كَنزاً مَخفِيّاً فَأَحبَبتُ أَن أُعرَفَ فَخَلَقتُ الخَلقَ لِكَي أُعرَفَ
-          وَخَلَقتُ الأَشياءَ لِأَجلِكَ وَخَلَقتُكَ لِأَجلي
-        </p>
-        <p class="hadith-translation">
-          گنجی پنهان بودم؛ دوست داشتم شناخته شوم، پس مخلوقات را آفریدم تا شناخته شوم؛
-          همه را برای انسان آفریدم و انسان را برای معرفت و شناخت خودم.
-        </p>
-        <p class="hadith-source">— حدیث قدسی</p>
-      </div>
+        /* باکس اصلی محتوا */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #2d2d2d;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
 
-      <p>
-        این تنها انسان است که طاقت و استعداد این معرفت را دارد و با همین امتیاز است که خداوند
-        او را مفتخر به جانشینی خود در زمین قرار داده:
-      </p>
+        h1 {
+            color: #80cbc4;
+            text-align: center;
+            margin-bottom: 5px;
+        }
 
-      <blockquote class="verse">
-        وَحَمَلَهَا الْإِنسَانُ ۖ إِنَّهُ كَانَ ظَلُومًا جَهُولًا
-        <cite>— سوره احزاب</cite>
-      </blockquote>
-      <p class="verse-translation">
-        این بار امانت — که همان معرفت‌الله و هدف از خلقت است — انسان با جرأت و جسارتی که دارد
-        پذیرفت؛ هرچند ظلوم و جهول بود.
-      </p>
+        .bismillah {
+            text-align: center;
+            color: #b2dfdb;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
 
-      <hr style="border:none; border-top: 1px solid var(--raised); margin: var(--space-5) 0;" />
+        h2 {
+            color: #80cbc4;
+            border-bottom: 2px solid #004d40;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            font-size: 1.3em;
+        }
 
-      <p>
-        <strong>عقل: حجت باطنی الهی.</strong> حضرت موسی بن جعفر (ع) به هشام فرمود:
-      </p>
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #e0e0e0;
+        }
 
-      <div class="hadith">
-        <p class="hadith-arabic">
-          إِنَّ لِلَّهِ عَلَى النَّاسِ حُجَّتَيْنِ: حُجَّةٌ ظَاهِرَةٌ وَحُجَّةٌ بَاطِنَةٌ،
-          فَأَمَّا الظَّاهِرَةُ فَالرُّسُلُ وَالأَنبِيَاءُ وَالأَئِمَّةُ،
-          وَأَمَّا الْبَاطِنَةُ فَالْعُقُولُ.
-        </p>
-        <p class="hadith-translation">
-          همانا خداوند برای انسان‌ها دو حجت (راهنما) قرار داده: حجتی آشکار که همان پیامبران و
-          امامان هستند، و دیگری پنهان که آن عقل‌هاست.
-        </p>
-        <p class="hadith-source">— تحف العقول</p>
-      </div>
+        /* باکس اختصاصی آیات و احادیث */
+        .quran-box {
+            background-color: #004d40; /* سبز یشمی تیره */
+            border-right: 5px solid #80cbc4;
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin: 22px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        }
 
-      <p>
-        اگر انسان‌ها عقل نداشتند، آمدن پیامبران معنی نداشت؛ و اگر پیامبران نیامده بودند، عقل‌ها
-        به تنهایی به سعادت نمی‌رسیدند. برای تکامل انسان، هر دو بال لازم است.
-      </p>
+        /* متن عربی با اعراب */
+        .arabic-text {
+            color: #ffffff; /* رنگ سفید */
+            font-size: 1.25em;
+            font-weight: bold;
+            font-family: 'Amiri', 'Traditional Arabic', Tahoma, serif;
+            display: block;
+            margin-bottom: 10px;
+            line-height: 2.2;
+        }
 
-      <hr style="border:none; border-top: 1px solid var(--raised); margin: var(--space-5) 0;" />
+        /* ترجمه فارسی زیر آیه */
+        .persian-trans {
+            color: #b2dfdb; /* سبز روشن ملایم جهت تفکیک زیبا و خوانایی */
+            font-size: 0.98em;
+            display: block;
+            line-height: 2;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            padding-top: 8px;
+        }
 
-      <p>
-        <strong>عقل ذاتی و عقل اکتسابی:</strong> عقل ذاتی به معنای داشتن مغز و اعصاب سالم است
-        که با رشد جسمی رشد می‌کند — به‌منزله استخری بزرگ که در بدو تولد خالی است:
-      </p>
+        .post-meta {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+            font-size: 0.85em;
+            color: #888;
+            text-align: left;
+            direction: ltr;
+        }
+    </style>
+</head>
+<body>
 
-      <blockquote class="verse">
-        وَاللَّهُ أَخْرَجَكُم مِّن بُطُونِ أُمَّهَاتِكُمْ لَا تَعْلَمُونَ شَيْئًا
-        <cite>— سوره نحل، آیه ۷۸</cite>
-      </blockquote>
-      <p class="verse-translation">خداوند شما را از شکم مادرانتان بیرون آورد در حالی که هیچ نمی‌دانستید.</p>
+<div class="container">
+    <h1>مقدمه</h1>
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
 
-      <p>
-        این استخر با پرورش و حواس مختلف و علوم گوناگون پر می‌شود و به <strong>عقل اکتسابی</strong>
-        تبدیل می‌گردد. اختلاف تربیت و اطلاعات، موجب اختلاف بینش‌ها و رفتار افراد می‌شود. مرکز همه
-        این ادراکات تنها مغز انسان است — مغزی با ۱۲ تا ۱۵ میلیارد رابطه الکتریکی و پانصد میلیون
-        شبکه ارتباطی — که همه فعالیت‌های جسمی و فکری تحت کنترل اوست.
-      </p>
+    <h2>موجودات سه گونه اند:</h2>
+    <p>1- جمادات موجوداتی هستند که هیچگونه تحرک و احساس و ادراک ظاهری ندارند.</p>
+    <p>و نباتات موجوداتی هستند که دارای نمو و رشد و تغذیه و تولید مثل می باشند اما فاقد شعور و ادراک هستند.</p>
+    <p>و حیوانات موجوداتی هستند که دارای رشد و تغذیه و تولید مثل و احساس و غرائز مختلف هستند و هرگونه انتخاب و اختیار آنان مربوط به غرائز و احساسات آنان می باشد اما فاقد انتخاب و اختیار معقول هستند.</p>
 
-    </article>
-    <!-- ══ پایان بخش ۱ ══════════════════════════════════ -->
+    <h2>تفاوت انسان و حیوان</h2>
+    <p>تفاوت انسان و حیوان در همین جهت است که انتخاب و اختیار انسان مبنی بر تعقل و تشخیص خیر و شر و خوب و بد می باشد و در عین این که محکوم غرائز حیوانی است اما با داشتن تعقل که مرتبه کاملتر احساس و ادراک و تعلیم و تربیت می باشد قدرت انتخاب راه صحیح و خیر و معقول را دارد. توضیح: خصوصیات مشترک بین انسان و حیوان را غریزه و یا هدایت تکوینی گویند</p>
 
+    <div class="quran-box">
+        <span class="arabic-text">﴿رَبَّنَا الَّذِي أَعْطَىٰ كُلَّ شَيْءٍ خَلْقَهُ ثُمَّ هَدَىٰ﴾ [طه: ۵۰]</span>
+        <span class="persian-trans">پروردگار ما آفریدگاری است که همه موجودات را آفرید و هر یک را در راه زندگی و کمال و رسیدن به هدف از خلقت خود راهنمایی نمود.</span>
+    </div>
+
+    <p>اما مختصات به انسان را فطرت نامند</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿فِطْرَتَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا﴾</span>
+        <span class="persian-trans">همان فطریاتی که خداوند همه انسانها را بر آن آفریده.</span>
+    </div>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿إِنَّا هَدَيْنَاهُ السَّبِيلَ إِمَّا شَاكِرًا وَإِمَّا كَفُورًا﴾ [«دهر»]</span>
+        <span class="persian-trans">ما انسان را به راه درست راهنمائی کردیم (حال این خود اوست) که براه درست برود و یا راه نادرست را انتخاب کند</span>
+    </div>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَاهَا﴾ [«شمس»]</span>
+        <span class="persian-trans">ما به انسان راه انحراف و راه پاکی را الهام نمودیم</span>
+    </div>
+
+    <p>پس انتخاب هر یک از دو راه به اختیار خود انسانست و خلاصه این که انسان نوعی حیوان بوده اما تکامل یافته تر از سایر حیوانات در صورتیکه از عقل و تعلیم و تربیت صحیح استفاده کند و گرنه (بَلْ هُمْ أَضَلُّ) می باشد و بهترین گواه مطلب تشابه جسمی است که انسان با سایر حیوانات در اعضاء و جوارح دارد و صرف نظر از خصوصیات مغزی و عقلی تنها از نظر جسمی اکمل و اجمل و اعجب و احسن حیوانات می باشد</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ﴾ [تین 4]</span>
+        <span class="persian-trans">ما انسان را در بهترین آراستگی آفریدیم</span>
+    </div>
+
+    <p>و با در نظر گرفتن خصوصیات مغزی و عقلی و ادراکات مختلف که قدرت بر شناخت اشیاء دیگر را داشته باید او را معجزه کل خلقت دانست و از این جهت در تعریف انسان او را حیوان ناطق گفته اند زیرا با داشتن تمام خصوصیات حیوانی به ناطق بودن ممتاز از سایر حیوانات می گردد که منظور از نطق نه تنها حرف زدن است بلکه آن ادراکات والا و مسائل عقلی و معرفتی است که</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ﴾ [«العلق»]</span>
+        <span class="persian-trans">آموختیم انسان را چیزهائی که نمیدانست و علم آدم الاسماء کلها</span>
+    </div>
+
+    <p>و به این نتیجه می رسیم که موجودی زیبا تر و عجیب تر از انسان نیست و اگر انسان نبود کل خلقت عبث و بیهوده بود.</p>
+
+    <h2>2- هدف آفرینش انسان — حدیث قدسی</h2>
+    <p>اینک باید دید که این انسان اشرف مخلوقات برای چه منظوری آفریده شده طبق حدیث قدسی که از حضرت داود در پاسخ این سوال از خداوند نقل شده</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">«كُنْتُ كَنْزاً مَخْفِيّاً فَأَحْبَبْتُ أَنْ أُعْرَفَ فَخَلَقْتُ الْخَلْقَ لِكَيْ أُعْرَفَ وَخَلَقْتُ الْأَشْيَاءَ لِأَجْلِكَ وَخَلَقْتُكَ لِأَجْلِي»</span>
+        <span class="persian-trans">گنجی پنهان بودم دوست داشتم که شناخته شوم پس مخلوقات را آفریدم تا شناخته شوم همه را برای انسان و انسان را برای (معرفت) و شناخت خودم</span>
+    </div>
+
+    <p>و این تنها انسان است که طاقت و تحمل و استعداد این معرفت را دارد</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿وَحَمَلَهَا الْإِنسَانُ إِنَّهُ كَانَ ظَلُومًا جَهُولًا﴾</span>
+        <span class="persian-trans">این بار امانت که همان معرفت الله است و هدف از خلقت انسان و همه موجوداتست این انسان است که با جرات و جسارتی که دارد می تواند به این هدف والا نائل گردد و با همین امتیاز است که او را مفتخر به جانشینی خود در زمین قرار داده.</span>
+    </div>
+
+    <h2>3- عقل، دومین پیامبر</h2>
+    <p>عقل برای انسان که بزرگترین موهبت الهی و تنها ممیزه انسان پیامبری است که می تواند انسان را به کمال لایق خود برساند همانطور که حضرت موسی بن جعفر در ضمن فرمایشات خود به هشام فرمود</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">«إِنَّ لِلَّهِ عَلَى النَّاسِ حُجَّتَيْنِ حُجَّةً ظَاهِرَةً وَحُجَّةً بَاطِنَةً فَأَمَّا الظَّاهِرَةُ فَالرُّسُلُ وَالْأَنْبِيَاءُ وَالْأَئِمَّةُ وَأَمَّا الْبَاطِنَةُ فَالْعُقُولُ» [تحف العقول]</span>
+        <span class="persian-trans">همانا خداوند برای انسانها دو حجت (راهنما) قرار داده حجتی آشکار که همان پیامبران و امامان هستند و دیگری پنهان که آن عقلها هستند که اگر انسانها عقل نداشتند آمدن پیامبران معنی نداشت چون آنها برای پرورش عقول مردم هستند همچنانکه اگر پیامبران نیامده بودند عقلها به تنهائی راه بجایی نبرده و به سعادت و کمال خود نمی رسیدند پس برای تکامل انسان این هر دو بال لازمست و از همین روست که پیامبران و امامان سخنی و یا عملی که خلاف راه تکامل انسانها باشد نگفته و انجام نداده اند و ضمنا هر عمل خیری که از انسانها انجام شود در نهایت نتیجه کار و سخنان انبیا و ائمه می باشد.</span>
+    </div>
+
+    <h2>4- عقل ذاتی و عقل اکتسابی</h2>
+    <p>اینک باید بدانیم که عقل ذاتی بمعنی داشتن مغز و اعصاب مغزی سالم است که با رشد جسمی بدن آن نیز رشد می نماید و بمنزله استخر بزرگی است که با داشتن ظرفیت زیاد در بدو تولد خالی بوده</p>
+
+    <div class="quran-box">
+        <span class="arabic-text">﴿وَاللَّهُ أَخْرَجَكُم مِّن بُطُونِ أُمَّهَاتِكُمْ لَا تَعْلَمُونَ شَيْئًا﴾ [نحل 78]</span>
+        <span class="persian-trans">خداوند شما را بیرون آورد از شکمهای مادرانتان در حالیکه هیچ نمی دانستید.</span>
+    </div>
+
+    <p>که با پرورش و پر کردن آن از راه تربیت و حواس مختلف و علوم و اطلاعات گوناگون به عقل اکتسابی نائل شده و بعلت همین اختلاف در تربیت و اطلاعات وارده موجب اختلاف بینشها و عقائد و رفتار متفاوت افراد می گردد زیرا هر نظر و عقیده و رفتار خوب یا بد بر مبنای ادراکات و معلومات و تربیتهای خاص آن فرد می باشد همانطور که سخن هرکس نماینده معلومات و محفوظات و تربیت اوست و می دانیم که مرکز ادراکات تنها مغز انسانست و دیگر اعضاء و جوارح که هر یک برای کاری و تامین نیازی از بدن و هماهنگی کلی با یکدیگر آفریده شده اند و هیچ یک از اعضاء بدن به عظمت و پیچیدگی مغز و کار آن نیست و همه احساسات و شخصیت فردی هر کس و اینکه من کیستم تنها مغز است که در ضمن اگر پنج دقیقه خون به آن نرسد مرگ او حتمی است مغزی که 12 تا 15 میلیارد رابطه الکتریکی که پانصد میلیون شبکه ارتباطی آنها را به یکدیگر وصل می نماید و همه فعالیتهای جسمی و فکری تحت کنترل و فرمان اوست.</p>
+
+    <div class="post-meta">
+        + نوشته شده در جمعه نهم بهمن ۱۳۸۸ ساعت 20:1 توسط کاظم
+    </div>
+</div>
+
+
+</h2>
+      <!-- محتوا اینجا -->
+    <!-- بخش ۲ -->
+    <section id="s2" class="section">
+      
+      <<h2 id="part-berzakh">بررسی آیاتی که به برزخ استشهاد شده</h2>
+
+<p>بررسی آیاتی که به برزخ استشهاد شده</p>
+
+<div class="quran-box">
+    <div class="arabic-text">حتی اذا جاء احدهم الموت قال رب ارجعون لعلی اعمل صالحاً فیما ترکت کلا انها کلمة هو قائلها و من ورائهم برزخ الی یوم یبعثون «مومنون 101»</div>
+    <div class="persian-trans">تا آن گاه که مرگ یکی از آنان فرا می‌رسد (یعنی مرگ خود آمدنی است طبق علل و عوامل مخصوص هر کس که دیگر از ادامه حیات ناامید شده) گوید (خواست درونی) پروردگارا مرا برگردان (که به زندگی خود ادامه دهم) شاید عمل صالحی انجام دهم که جبران گذشته نمایم (به او گفته می شود) هرگز، این سخنی است که خود گوینده آن هستی و پس از مرگشان تا قیامت فاصله ایست و کلمه برزخ همانطور که در کتب لغت آمده بمعنی فاصله می باشد و در تفسير كشاف ذيل اين آيه آمده ( اذا ايقن بالموت و اطلع علي حقيقه الامر ادركته الحسره علي ما فرط فيه من الايمان و العمل الصالح فيه فسئل الرجعه و امامهم حائل بينهم وبين الرجعه الي يوم البعث ) آنگاه که شخص خود را در حال مرگ می می بیند و بر حقیقت اعمال گذشته خود آگاه شده با وحشت از آینده و حسرت بر گذشته و فرصت های از دست داده و کوتاهی در ایمان و کارهای شایسته، خواهان بازگشت (که همان ادامه حیات است) گردیده اما متاسفانه میان او و باز گشت تا قیامت فاصله است.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">اني آمنت بربكم فاسمعون قیل ادخل الجنه قال یا لیت قومی یعلمون بما غفرلی ربی و جعلنی من المکرمین «یس 27»</div>
+    <div class="persian-trans">من ايمان آوردم به پروردگار شما (خطاب به رسولان) پس بشنويد (و شاهد باشيد) به آن مرد با ایمان (حبیب نجار) گفته شد (گوینده معلوم نیست شاید گوینده همان قوم بوده اند و شاید از روی استهزاء بوده كه در الميزان آمده و فخر رازي گويد (سیقال له یعنی بزودی در قیامت به او گفته می شود) داخل بهشت شو گوید ای کاش قوم من می دانستند که ايمان آوردن من سبب شد كه پروردگار من مرا مورد آمرزش و لطف و كرم خود قرار داد) همه گفت و شنيد ها در حال حيات وي بوده و نيازي نيست كه اينها را پس از كشته شدن احتمالي وي و با روح جدا شده او بدانيم و فرمان به دخول بهشت در قيامت است.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">النار یعرضون علیها غدوّاً و عشیّاً و یوم تقوم الساعة ادخلوا ال فرعون اشد العذاب «غافر 46»</div>
+    <div class="persian-trans">آتش بر آنها عرضه می گردد هر صبح و شام و آنگاه که قیامت فرا رسید (می گویند) آنان را در سخت ترین عذاب داخل کنید. گفته شده كه چون در قيامت صبح و شامي نيست پس آيه مربوط به عالم برزخ مي باشد در صورتيكه همين تعبير براي بهشتيان به كار رفته: و یوم یعرض الذین کفروا علی النار الیس هذا بالحق «احقاف 4» و یوم یعرض الذین کفروا علی النار اذهبتم طیبا تکم فی حیاتکم الدنیا «احقاف 20» و روزگي ده مي شوند كافران بر آتش (زيرا كه) در زندگي دنيا پا بما غفرلی ربی و جعلنی من المکرمین «یس 27»</div>
+    <div class="persian-trans">من ايمان آوردم به پروردگار شما (خطاب به رسولان) پس بشنويد (و شاهد باشيد) به آن مرد با ایمان (حبیب نجار) گفته شد (گوینده معلوم نیست شاید گوینده همان قوم بوده اند و شاید از روی استهزاء بوده كه در الميزان آمده و فخر رازي گويد (سیقال له یعنی بزودی در قیامت به او گفته می شود) داخل بهشت شو گوید ای کاش قوم من می دانستند که ايمان آوردن من سبب شد كه پروردگار من مرا مورد آمرزش و لطف و كرم خود قرار داد) همه گفت و شنيد ها در حال حيات وي بوده و نيازي نيست كه اينها را پس از كشته شدن احتمالي وي و با روح جدا شده او بدانيم و فرمان به دخول بهشت در قيامت است.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">النار یعرضون علیها غدوّاً و عشیّاً و یوم تقوم الساعة ادخلوا ال فرعون اشد العذاب «غافر 46»</div>
+    <div class="persian-trans">آتش بر آنها عرضه می گردد هر صبح و شام و آنگاه که قیامت فرا رسید (می گویند) آنان را در سخت ترین عذاب داخل کنید. گفته شده كه چون در قيامت صبح و شامي نيست پس آيه مربوط به عالم برزخ مي باشد در صورتيكه همين تعبير براي بهشتيان به كار رفته: و یوم یعرض الذین کفروا علی النار الیس هذا بالحق «احقاف 4» و یوم یعرض الذین کفروا علی النار اذهبتم طیبا تکم فی حیاتکم الدنیا «احقاف 20» و روزگي ده مي شوند كافران بر آتش (زيرا كه) در زندگي دنيا پا لا تقولوا انهم امواتا و لا تسموهم بالموتی و انهم سیحيون غیر بعید — نگوئید اینان مردگانند و آنان را مرده ننامید و آنان بزودی زنده خواهند شد.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">و لا تحسبن الذین قتلوا فی سبیل الله امواتاً بل احیاء عند ربهم یرزقون «ال عمران 169»</div>
+    <div class="persian-trans">کسانی که در راه خدا کشته شده اند مرده مپندارید بلکه آنان زنده اند و در پیشگاه پروردگارشان روزی می برند.</div>
+</div>
+
+<p><strong>تحلیل نهایی از دو آیه اخیر:</strong> از جمع دو آیه اخیر استفاده می شود که 1- قتل فی سبیل الله نه هر قتلی و نه هر کس که از دنیا می رود و این حیاتی است مخصوص شهدا که شما آنرا درک نمی کنید همانطور که (ولکم فی القصاص حیوه یا اولی الالباب) «بقره 179» این چه حیاتی است که با قصاص از قاتل و کشتن آن بدست می آید و نظیر آیه یا ایها الذین امنوا استجیبوا لله و للرسول اذا دعاکم لما یحییکم «انفال 24» ای کسانیکه ایمان آورده اید دعوت خدا و رسولش را بپذیرید وقتی که فرا می خواند شما را برای چیزی که حیات شما در آن است. این چه حیاتی است که با رفتن به جهاد و کشتن دیگران فراهم می شود. نیست مگر حیات معنوی یعنی ابقاء و استواری توحید تا قیامت و چون اثر آن در ارشاد انسانها در حال و آینده خارج از درک آنان بوده آنان را به (ولکن لا تشعرون) مخاطب قرار داده. 2- من عمل صالحاً من ذکرٍ او انثی و هو مومن فلنحیینه حیوة طیبة «نحل 97» هر کس عمل صالحی انجام داد از روی ایمان خواه مرد یا زن ما او را زنده می کنیم زندگی پاکیزه. این حیات طیب را در آیه و ان الدار الاخرة لهی الحیوان لو کانوا یعلمون «عنکبوت 64» همانا حیات واقعی در آخرت است اگر بدانید توضیح داده پس حیات واقعی طیب برای شهیدان همان حیات عالم آخرتست. در کتاب المعجم فی فقه القرآن ج 4 صفحه 774 در مورد حیات شهدا چنین آمده: پس از بررسی مجموع آرا و عقاید متفاوت با موافقت با نظر اکثریت می گویم که آن حیات حقیقی متصل به حیات دنیایی آنان می باشد نه بدان معنی که آنان مرده اند و سپس خداوند آنان را زنده گردانیده بلکه بدین معنا که حیات آنان به شکلی بالاتر و اشرف از حیاتشان در دنیا استمرار یافته به طوریکه نحوه آن حیات را غیر از خدا کسی نمی داند و این مخصوص شهدا نه آن حیات برزخی که برای عموم مومنین گفته شده آن طور که از ظاهر عبارت المیزان استفاده می شود بلکه ما حقیقت آن حیات را نمی دانیم همچنانکه در آیه سوره بقره فرموده (ولیکن آن حیات را در المیزان فرموده (ولیکن آن حیات را درک نمی کنید) ولی قرآن خصوصیات آن حیات را در سوره آل عمران چنین بیان نموده: 1- آن حیاتی است الهی و معنوی روحانی نه مادی مربوط به جسم ایشان 2- روزی می برند نزد خداوند نه از جنس روزی های ما و نه از جنس روزی های اهل بهشت 3- حشر آنان با خداوند و حضور در پیشگاه او نشسته بر سفره او مهمانانی که با کرامت او بسر می برند (فردحین بما اتاهم الله من فضله) و در سوره محمد آیه 4 می فرماید والذین قتلوا فی سبیل الله فلن یضل اعمالهم — ترجمه: آنچه از شهید باقی می ماند تنها عمل آنان که جانفشانی در راه خدا و دین خدا بوده و اثر آن که اصلاح جامعه و ابقاء توحید و دین خداست می باشد و آنان را زنده جاوید نگه می دارد و اگر منظور از آیه بقای روح است که این معنا اختصاص به شهدا ندارد و به هر صورت از این دو آیه هم نه حیات برزخی استفاده می شود و نه بقاء روح.</p>
+
+<p>ضمناً اعتقاد به حیات برزخی چنانکه علامه طباطبایی در جلد اول المیزان ص 351 اظهار نموده از ضروریات قرآن نبوده و مسلمین نیز اجماع نظر بر آن ندارند. و انكار آن انكار ضروري دين نيست.</p>
+
+<p>نکته جالب اینکه در هیچ یک از آیات قرآن در مورد صحبتهای بهشتیان و جهنمیان درباره پس از مرگ تا قیامت بین آنان دیده نمی شود که بتوان برای اثبات برزخ و بقاء روح به آن استناد نمود.</p>
+
+<p>شاید تعصب فلاسفه و عرفا و بسیاری از دانشمندان اسلامی بر اعتقاد و اثبات روح بخاطر آن بوده که تصور می کرده اند که انکار روح مساوی انکار خداوند یا قیامت و یا مجردات می باشد در صورتیکه انکار روح و بجای آن اثبات همه این قدرتهای غیر مادی برای مغز انسان در حیات و زندگی این جهان منافات با اعتقاد به خدا و قیامت ندارد و چون مادیین منکر خداوند، روح را نیز منکر می شده اند این توهم پیش آمده که هر کس روح را منکر باشد بالملازمه منکر خداوند است در صورتیکه چنین ملازمه ای در کار نیست.</p>
+
+<p>+ نوشته شده در جمعه نهم بهمن ۱۳۸۸ ساعت 20:5 توسط کاظم</p>
+->
+    </section>
+
+    <!-- بخش ۳ -->
+    <section id="s3" class="section">
+      <h2 id="part-3"><h2 id="part-rooh">روح در قرآن لازم است بدانیم</h2>
+
+<p><strong>بخش اول: ۱۹ کاربرد کلمه «روح» در قرآن</strong></p>
+
+<div class="quran-box">
+    <div class="arabic-text">ثم سویه و نفخ فیه من روحه «سجده 9، حجر 29، ص 72»</div>
+    <div class="persian-trans">نفخ روح تنها در آدم بوده (جان دادن به کالبد خاکی به امر دفعی و بدون اسباب عادی) و نسل او از «ماء مهین» به نفخ روح نیاز ندارد؛ «خلقاً آخر» یعنی تکامل جسمی، نه دمیدن روح جدید. + آیه نساء 1.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">و کلمته القیها الی مریم و روح منه «بقره 87 و 253، نساء 171، مائده 110»</div>
+    <div class="persian-trans">در چهار مورد برای حضرت عیسی (ع) استفاده شده است.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">فنفخنا فیها من روحنا «انبیا 91، تحریم 12»</div>
+    <div class="persian-trans">در دو مورد برای حضرت مریم (س) استفاده شده که عیسی معجزه الهی بدون پدر بوده است. + حدیث اول و دوم از اصول کافی باب الروح از امام صادق(ع): روح در آدم و عیسی «مخلوقة» است (مجلسی در مرآة العقول: اولی صحیح، دومی حسن).</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">نزول قرآن با روح الامین «شعراء 193، نحل 2 و 102، شوری 52»</div>
+    <div class="persian-trans">روح الامین = فرشته امین ابلاغ (جبرئیل یا مقرب‌تر از او) در چهار مورد.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">القاء روح بر بندگان خاص «غافر 15، مجادله 22»</div>
+    <div class="persian-trans">در دو مورد به معنای روح آرامش/تقوی و حیات معنویِ ویژه مشیت الهی.</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">عروج، نزول و قیام روح «معارج 4، شب قدر، نباء 38»</div>
+    <div class="persian-trans">روح همراه ملائکه؛ نقل از مناهج البیان از ملکی (ج 29 ص 81): تفاسیر متعدد بدون دلیل عقلی/شرعی، پس «الاولی التوقف» (توقف و واگذاری علم به خدا و اولیاء).</div>
+</div>
+
+<p><strong>جمع‌بندی:</strong> روح معمولاً با «اذن، اراده، مشیت» یا ضمیر متکلم وحده آمده؛ پاسخ به سؤال: «قل الروح من امر ربی» — خدا جواب را مسکوت نگذاشته.</p>
+
+<p>+ نوشته شده در شنبه دهم بهمن ۱۳۸۸ ساعت 20:57 توسط کاظم</p>
+
+<hr>
+
+<p><strong>بخش دوم: آیاتی که می‌توان بر انکار عالم برزخ و روح به آن استناد نمود</strong></p>
+
+<div class="quran-box">
+    <div class="arabic-text">بقره 259 (عزیر/ارمیا)</div>
+    <div class="persian-trans">بعد از صد سال زنده شدن هیچ اطلاعی از مرگ و مدت آن نداشت — اگر روح/برزخی بود باید می‌دانست؛ قیاس با مرگ مغزی و بیهوشی. شعار: «المغز فی وحدته کل القوی» (مغز به‌تنهایی حامل همه قوا). نقد «الروح جسمانیه الحدوث روحانیه البقاء» به‌عنوان برخلاف مشاهده؛ پایان با «نشئکم فیما لا تعلمون» (واقعه 61).</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">یس 52</div>
+    <div class="persian-trans">بیداری از «خواب سنگین» مرگ؛ تفاوت خواب و مرگ (در خواب مغز کار می‌کند، در مرگ نه).</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">شش آیه درباره کم بودن فاصله مرگ تا قیامت</div>
+    <div class="persian-trans">مومنون 114، یونس 45، روم 56، اسرا 52، احقاف 35، نازعات 46 — «لبثوا الا ساعه/قلیلاً» یعنی هیچ ادراکی در این فاصله نبوده؛ پس احضار روح تخیل و شبیه شعبده‌بازی است (المیزان ج1) و سؤال: یک انسان چند روح دارد؟</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">تشبیه حشر به سبز شدن گیاهان</div>
+    <div class="persian-trans">فاطر 9، فصلت 39، اعراف 75 و 25، روم 19، زخرف 11 — زنده شدن مردگان مانند روییدن زمین با عوامل و شرایط؛ شاید از یک سلول باقیمانده («کما بدأکم تعودون»)؛ در حشر همه اسرار نمایان است و حتی نیاز به محاسبه نیست («کفی بنفسک الیوم علیک حسیبا»).</div>
+</div>
+
+<div class="quran-box">
+    <div class="arabic-text">پاداش و مجازات فقط در قیامت</div>
+    <div class="persian-trans">مومنون 105 و 111، آل عمران 185، مجادله 7، انفطار 5، مومن 17، فجر 23 — نتیجه: قبل از احیاء در قیامت نه روحی باقی است، نه خبری از اعمال، نه پاداش/عذاب. + بقره 28 (لم یکن شیئاً مذکوراً)، یس 79 (قل یحییها الذی انشاها اول مره)، یس 52 (تکرار).</div>
+</div>
+
+<p>+ نوشته شده در شنبه دهم بهمن ۱۳۸۸ ساعت 20:55 توسط کاظم</p>
+</h2>
+     
+
+
+
+   
+
+    <section id="s4" class="section">
+      <h2> <h2 id="part-roya">رویا و خواب دیدنها</h2>
+
+<p>بعضی برای اثبات روح به خواب دیدن استناد کرده و پنداشته‌اند روح انسان در خواب از بدن جدا شده و به آسمان رفته و قضایایی دریافت می‌کند (بعضی صریح، بعضی نیازمند تعبیر). در حالیکه حقیقت خواب طبق نظر دانشمندان مربوطه، <strong>تعطیل قسمتی از مغز و سیستم اعصاب</strong> در اثر خستگی جسمی است و رویاها همان فعالیت مغز و ارتباطات سلولی مغز است؛ چون اگر جان از بدن خارج شود که مرگ است و برگشتن ندارد.</p>
+
+<p>خواب دیدن گاهی مربوط به عدم تعادل مزاج است (مثل سنگینی معده — از این جهت گفته می‌شود خواب سر شب پس از غذا تعبیر ندارد) و یا گرسنگی، تشنگی، سرما و گرمای شدید، تب و سایر نیازهای جسمی و جنسی که آنرا <strong>اضغاث احلام</strong> می‌گویند و تعبیری ندارند مگر همان عدم تعادل جسمی؛ و گاهی مربوط به تمرکزات ذهنی و توجه به مسائلی است که در بیداری ذهن را مشغول کرده — به همین جهت خانواده‌ای که شخصی از آنان فوت شده غالباً او را در خواب می‌بینند و هر کدام به شکل و برخوردی مخصوص متناسب با سوابق ذهنی خود.</p>
+
+<p>همه این موارد جزء فعالیت‌های قوه تخیل و ادراکات مغزی است؛ از همین نوع است خواب دیدن عالمی که در مطالعات به مشکلی برخورده و استاد خود (یا دیگری) را در خواب می‌بیند و جواب می‌گیرد، ولی در حقیقت در اثر فراغت ذهنی به جواب می‌رسد؛ یا کسی گمشده‌ای دارد و در خواب آن را می‌یابد.</p>
+
+<p>در این رابطه می‌توان به این اشعار اشاره کرد:</p>
+<blockquote style="border-right: 3px solid #004d40; padding-right: 15px; color: #b2dfdb;">
+    «همچو آن وقتی که خواب اندر روی / تو ز پیش خود به پیش خود شوی»<br>
+    «بشنوی از خویش و پنداری فلان / با تو اندر خواب گفتست آن نهان»
+</blockquote>
+
+<p><strong>رویای صادقه انبیاء و اولیاء و حدیث:</strong><br>
+خواب دیدن انبیاء و اولیاء نوعی از وحی و الهام است و قابل تحقیق و تعبیر؛ که رویای صادقه و به تعبیر بعضی «حس ششم» نامیده می‌شود. نقل از <strong>بحار ج ۶۱ ص ۱۹۳</strong>: «قال رسول الله: الرویا ثلاث: منها تخویف من الشیطان لیحزن به ابن آدم، و منها الامر یحدث به نفسه فی الیقظه فیراه فی المنام، و منها جزء من ستة و اربعین جزء من النبوة» — رویا سه گونه است: ترس‌اندازی از شیطان برای اندوهگین کردن انسان؛ اموری که ذهن در بیداری متوجه آن بوده و در خواب می‌بیند؛ و جزئی از ۴۶ جزء پیامبری.</p>
+
+<p>نیز از ابو بصیر از امام صادق(ع): مردی پرسید مردی با همسرش خوابیده و خواب می‌بیند که در مکه یا شهر دیگری است، آیا ارواحشان از بدن خارج شده؟ فرمود: اگر روح از بدن خارج شود دیگر برنمی‌گردد؛ بلکه [خوابیدن] بمنزله خورشید است در آسمان که شعاع آن در دنیاست — خورشید، بدنِ جان آدمی است که در حال خواب، تخیلات مغزی، شعاعی است از وجودِ حیات برای انسان.</p>
+
+<div class="quran-box">
+    <div class="arabic-text">النوم هو الرکود الذی یاخذ حواس الحیوان لعوامل طبیعیه تحدث فی بدنه</div>
+    <div class="persian-trans">نقل از المیزان ج ۲ ص ۳۴۸: خواب عبارت است از رکودی که بخاطر عوامل طبیعی در حواس حیوان در بدنش پدید می‌آید.</div>
+</div>
+
+<p>+ نوشته شده در یکشنبه یازدهم بهمن ۱۳۸۸ ساعت 20:36 توسط کاظم</p>
+</h2>
+    </section></h2>
+    </section>
+
+    <section id="s5" class="section">
+      <h2><h2 id="part-tawaffi">توفی در قرآن</h2>
+
+<p>«توفی» بمعنی <strong>اخذ الشیئ بتمامه</strong> (گرفتن همه‌چیز) است و چون در قرآن هم برای حین مرگ به‌کار رفته و هم در مورد قیامت، برای دانستن اینکه در حین مرگ چه چیزی دریافت می‌کنند، باید دید در قیامت چه چیزی بازپس و یا پرداخت می‌شود:</p>
+
+<ul>
+    <li><strong>انما توفون اجورکم یوم القیمه</strong> (آل عمران ۱۸۵) — همانا پرداخت می‌شود اجرهای شما روز قیامت (اجر = مزد عمل).</li>
+    <li><strong>ثم توفی کل نفس ما کسبت و هم لا یظلمون</strong> (بقره ۲۸۱، آل عمران ۱۶۱) — بازپس داده می‌شود به هر کس آنچه را انجام داده، بدون ستم.</li>
+    <li><strong>و وفیت کل نفس ما عملت و هو اعلم بما یفعلون</strong> (زمر ۷۰) — پرداخت می‌شود هر کس را آنچه عمل نموده؛ و «اعلم بما یفعلون» گویای این است که اجر اعمال مطابق با نیت‌های باطنی داده می‌شود. (آیات مرقوم با آیات مشابه بیش از بیست مورد است.)</li>
+    <li><strong>و ما تنفقوا من خیر یوف الیکم و انتم لا تظلمون</strong> (بقره ۲۷۲) و <strong>و ما تنفقوا من شیئی فی سبیل الله یوف الیکم</strong> (انفال ۶۰) — آنچه انفاق می‌کنید به شما بازپس داده می‌شود.</li>
+    <li><strong>الذین تتوفیهم الملائکه طیبین یقولون سلام علیکم ادخلوا الجنه بما کنتم تعملون</strong> (نحل ۳۲) — پاکیزگان که ملائکه به‌موقع پرداخت‌نامه اعمالشان را به آنان می‌رسانند و می‌گویند سلام بر شما، وارد بهشت شوید بخاطر اعمالی که انجام داده‌اید.</li>
+</ul>
+
+<p>با توجه به این دسته آیات که اعمال و دستاوردها و پاداش آنها در آخرت بازپس داده و پرداخت می‌گردد، معلوم می‌شود آنچه هم به‌هنگام مرگ خداوند یا فرستادگانش دریافت می‌کنند، همان اعمال و دستاوردهاست؛ مثل: <strong>قل یتوفاکم ملک الموت الذی وکل بکم</strong> (سجده ۱۱) و <strong>حتی اذا جاء احدکم الموت توفته رسلنا و هم لا یفرطون</strong> (انعام ۶۱). بنابراین به‌هنگام مرگ همان چیزی دریافت می‌شود که در آخرت پرداخت می‌شود و آن چیزی جز عمل نیست؛ وگرنه جسم اشخاص دریافت‌کردنی نیست و روحی هم که در کار نیست تا قبض شود و برای چه قبض شود.</p>
+
+<p>چون بعضی مفسرین به این مطلب توجه ننموده‌اند، توفی حین مرگ را به <strong>قبض روح</strong> گرفته و بعد عالمی هم برای آن ساخته‌اند بنام <strong>عالم برزخ</strong> و بعد هم با خواب‌هایی که از اموات دیده‌اند آنها را در لذت یا عذاب وارد کرده‌اند؛ در حالیکه از <strong>۴۰ مورد</strong> کلمه «توفی» در آیات قرآن هیچ‌یک ظهوری در گرفتن و برگرداندن روح ندارند، بلکه مربوط به گرفتن اعمال در حین مرگ و بازپس دادن آن در قیامت است.</p>
+
+<p>اعتقاد به وجود روح در بین مسلمین و فلسفه اسلامی ظاهراً پس از <strong>انتقال حکمت یونانیان</strong> با ترجمه شدن به عربی و انتشار آن (که قطعاً در زمان بنی‌العباس شروع شده — خدمات متقابل ص ۷۹۰) در بین مسلمین و تطبیق آن با بعضی روایات (ضعیف) و ظواهر بعضی آیات بوده؛ از جمله (ثم انشا ناه خلقاً آخر) که آن را به ایجاد روح در جنین تأویل کردند و چون ذهنشان مشوب به این مطلب شده آن را منطبق با اسلام نموده‌اند؛ در حالیکه اگر خالی‌الذهن به سراغ قرآن برویم چنین مطلبی استفاده نمی‌گردد.</p>
+
+<p>+ نوشته شده در یکشنبه یازدهم بهمن ۱۳۸۸ ساعت 20:38 توسط کاظم</p>
+</h2>
+    </section>
+
+    <section id="s6" class="section">
+      <h2>بخش ۶</h2>
+    </section>
+
+    <section id="s7" class="section">
+      <h2>بخش ۷</h2>
+    </section>
+
+    <section id="s8" class="section">
+      <h2>بخش ۸</h2>
+    </section>
+
+    <section id="s9" class="section">
+      <h2>بخش ۹</h2>
+    </section>
+
+    <section id="s10" class="section">
+      <h2>بخش ۱۰</h2>
+    </section>
+
+    <section id="s11" class="section">
+      <h2>بخش ۱۱</h2>
+    </section>
+
+    <section id="s12" class="section">
+      <h2>بخش ۱۲</h2>
+    </section>
+
+    <section id="s13" class="section">
+      <h2>بخش ۱۳</h2>
+    </section>
+
+    <section id="s14" class="section">
+      <h2>بخش ۱۴</h2>
+    </section>
+
+    <section id="s15" class="section">
+      <h2>بخش ۱۵</h2>
+    </section>
+
+    <section id="s16" class="section">
+      <h2>بخش ۱۶</h2>
+    </section>
+
+    <section id="s17" class="section">
+      <h2>بخش ۱۷</h2>
+    </section>
+
+    <section id="s18" class="section">
+      <h2>بخش ۱۸</h2>
+    </section>
+
+    <section id="s19" class="section">
+      <h2>بخش ۱۹</h2>
+    </section>
+
+    <section id="s20" class="section">
+      <h2>بخش ۲۰</h2>
+    </section>
+
+    <section id="s21" class="section">
+      <h2>بخش ۲۱</h2>
+    </section>
+
+    <section id="s22" class="section">
+      <h2>بخش ۲۲</h2>
+    </section>
+
+    <section id="s23" class="section">
+      <h2>بخش ۲۳</h2>
+    </section>
+
+    <section id="s24" class="section">
+      <h2>بخش ۲۴</h2>
+    </section>
+
+    <section id="s25" class="section">
+      <h2>بخش ۲۵</h2>
+    </section>
+
+    <section id="s26" class="section">
+      <h2>بخش ۲۶</h2>
+    </section>
+
+    <section id="s27" class="section">
+      <h2>بخش ۲۷</h2>
+    </section>
+
+    <section id="s28" class="section">
+      <h2>بخش ۲۸</h2>
+    </section>
+
+    <section id="s29" class="section">
+      <h2>بخش ۲۹</h2>
+    </section>
+
+    <section id="s30" class="section">
+      <h2>بخش ۳۰</h2>
+    </section>
+
+    <section id="s31" class="section">
+      <h2>بخش ۳۱</h2>
+    </section>
+
+    <section id="s32" class="section">
+      <h2>بخش ۳۲</h2>
+    </section>
+
+    <section id="s33" class="section">
+      <h2>بخش ۳۳</h2>
+    </section>
   </main>
 
-  <!-- ══ FOOTER ═══════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <p>نوشته آیت‌الله کاظم &mdash; نهم بهمن ۱۳۸۸</p>
-  </footer>
+</div>
+
+<script>
+/* ── هایلایت بخش فعال در فهرست ──────────────── */
+(function () {
+  var links = document.querySelectorAll('.toc a');
+  var map = {};
+  links.forEach(function (a) {
+    map[a.getAttribute('href').slice(1)] = a;
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      Object.values(map).forEach(function (a) {
+        a.classList.remove('active');
+      });
+      var a = map[e.target.id];
+      if (a) {
+        a.classList.add('active');
+        a.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  document.querySelectorAll('.section').forEach(function (s) {
+    io.observe(s);
+  });
+})();
+
+/* ── نوار پیشرفت ──────────────────────────── */
+(function () {
+  var bar = document.getElementById('progress');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 
 </body>
 </html>
-
-<!-- ══ بخش ۲: بررسی آیات مربوط به برزخ ══════════════════ -->
-<article class="article-section" id="part-2">
-
-  <div class="section-header">
-    <span class="section-number">۲</span>
-    <h2 class="section-title">بررسی آیاتی که به برزخ استشهاد شده</h2>
-  </div>
-
-  <!-- آیه ۱ -->
-  <h3 class="subsection-title">۱. سوره مؤمنون،شهاد شده</h2>
-  </div>
-
-  <!-- آیه ۱ -->
-  <h3 class="subsection-title">۱. سوره مؤمنون،هُمُ الْمَوْتُ قَالَ رَبِّ ارْجِعُونِ
-    لَعَلِّي أَعْمَلُ صَالِحًا فِيمَا تَرَكْتُ ۚ كَلَّا ۚ إِنَّهَا كَلِمَةٌ
-    هُوَ قَائِلُهَا ۖ وَمِن وَرَائِهِم بَرْزَخٌ إِلَىٰ يَوْمِ يُبْعَثُونَ
-    <cite>— سوره مؤمنون، آیه ۱۰۱</cite>
-  </blockquote>
-  <p class="verse-translation">
-    تا آن‌گاه که مرگ یکی از آنان فرا می‌رسد، می‌گوید: پروردگارا مرا برگردان،
-    شاید عمل صا مرا برگردان،
-    شاید عمل صالح. هرگز — این سخنی است که
-    خود گوینده آن است؛ و پس از مرگشان تا قیامت فاصله‌ایست.
-  </p>
-
-  <p>
-    کلمه «برزخ» همان‌طور که در کتب لغت آمده به معنای <strong>فاصله</strong> است،
-    نه عالمی مستقل. تفسیر کشاف ذیل این آیه می‌گوید:
-  </p>
-
-  <div class="hadith">
-    <p class="hadith-arabic">
-      إذا أيقن بالموت و اطّلع على حقيقة الأمر أدركته الحسرة على ما فرّط فيه
-      من الإيمان و العمل الصالح فسأل الرجعة و أمامهم حائل بينهم و بين
-      الرجعة إلى يوم البعث
-    </p>
-    <p class="hadith-translation">
-      آن‌گاه که شخص خود را در حال مرگ می‌بیند و بر حقیقت اعمال گذشته‌اش آگاه
-      می‌شود، با وحشت از آینده و حسرت بر گذشته و فرصت‌های از دست رفته، خواهان
-      بازگشت — که همان ادامه حیات است — می‌گردد؛ اما متأسفانه میان او و
-      بازگشت تا قیامت فاصله است.
-    </p>
-    <p class="hadith-source">— تفسیر کشاف</p>
-  </div>
-
-  <p>
-    پس آیه تنها بیانگر لحظه احتضار و حسرت و درخواست بازگشت به دنیاست،
-    نه اثبات عالم برزخ به‌عنوان دوره‌ای از حیات مستقل.
-  </p>
-
-  <hr class="section-divider" />
-
-  <!-- آیه ۲ -->
-  <h3 class="subsection-title">۲. سوره یس، آیه ۲۷ — حبیب نجار</h3>
-
-  <blockquote class="verse">
-    إِنِّي آمَنتُ بِرَبِّكُمْ فَاسْمَعُونِ ۝ قِيلَ ادْخُلِ الْجَنَّةَ ۖ
-    قَالَ يَا لَيْتَ قَوْمِي يَعْلَمُونَ ۝ بِمَا غَفَرَ لِي رَبِّي
-    وَجَعَلَنِي مِنَ الْمُكْرَمِينَ
-    <cite>— سوره یس، آیات ۲۵–۲۷</cite>
-  </blockquote>
-  <p class="verse-translation">
-    من به پروردگار شما ایمان آوردم؛ پس بشنوید. به او گفته شد: وارد بهشت شو.
-    گفت: ای کاش قوم من می‌دانستند که پروردگارم مرا مورد آمرزش قرار داد
-    و از گرامی‌داشته‌شدگان قرار داد.
-  </p>
-
-  <p>
-    همه این گفت‌وشنیدها در حال حیات حبیب نجار بوده است. فخر رازی گوید:
-    «سیُقال له» — یعنی این فرمان دخول بهشت در قیامت است، نه در برزخ.
-    نیازی نیست این وقایع را پس از کشته شدن احتمالی او و با روح جداشده‌اش
-    بدانیم. فرمان دخول بهشت در قیامت است.
-  </p>
-
-  <hr class="section-divider" />
-
-  <!-- آیه ۳ -->
-  <h3 class="subsection-title">۳. سوره غافر، آیه ۴۶ — آل فرعون</h3>
-
-  <blockquote class="verse">
-    النَّارُ يُعْرَضُونَ عَلَيْهَا غُدُوًّا وَعَشِيًّا ۖ وَيَوْمَ تَقُومُ
-    السَّاعَةُ أَدْخِلُوا آلَ فِرْعَوْنَ أَشَدَّ الْعَذَابِ
-    <cite>— سوره غافر، آیه ۴۶</cite>
-  </blockquote>
-  <p class="verse-translation">
-    آتش هر صبح و شام بر آنان عرضه می‌گردد؛ و آن‌گاه که قیامت برپا شد،
-    آل فرعون را در سخت‌ترین عذاب داخل کنید.
-  </p>
-
-  <p>
-    گفته شده چون در قیامت صبح و شامی نیست، پس آیه مربوط به عالم برزخ است.
-    اما همین تعبیر «بکرهً و عشیّاً» برای بهشتیان نیز به کار رفته:
-  </p>
-
-  <blockquote class="verse">
-    جَنَّاتُ عَدْنٍ الَّتِي وَعَدَ الرَّحْمَٰنُ عِبَادَهُ بِالْغَيْبِ …
-    لَا يَسْمَعُونَ فِيهَا لَغْوًا إِلَّا سَلَامًا ۖ وَلَهُمْ رِزْقُهُمْ
-    فِيهَا بُكْرَةً وَعَشِيًّا
-    <cite>— سوره مریم، آیه ۶۲</cite>
-  </blockquote>
-  <p class="verse-translation">
-    بهشت‌های عدن که خداوند رحمان به بندگانش وعده داده … هر صبح و شام
-    روزی‌شان به آنان داده می‌شود.
-  </p>
-
-  <p>
-    این آیه صریحاً مربوط به بهشت است و «صبح و شام» در آن آمده؛ پس همان‌طور
-    که رزق بهشتیان در قیامت بکره و عشیّاً است، عذاب آل فرعون نیز
-    غدوّاً و عشیّاً خواهد بود — نه در برزخ. همچنین عرضه آتش را می‌توان
-    چنین دانست: آثار بد اعمال ستمگرانه، آتشِ لعن و نفرین مردم مظلوم را
-    هر صبح و شام بر آنان جاری می‌سازد، و با قیام قیامت در اشدّ العذاب
-    وارد می‌شوند.
-  </p>
-
-  <hr class="section-divider" />
-
-  <!-- آیه ۴ و ۵ -->
-  <h3 class="subsection-title">۴ و ۵. آیات شهدا — بقره ۱۵۴ و آل‌عمران ۱۶۹</h3>
-
-  <blockquote class="verse">
-    وَلَا تَقُولُوا لِمَن يُقْتَلُ فِي سَبِيلِ اللَّهِ أَمْوَاتٌ ۚ
-    بَلْ أَحْيَاءٌ وَلَٰكِن لَّا تَشْعُرُونَ
-    <cite>— سوره بقره، آیه ۱۵۴</cite>
-  </blockquote>
-
-  <blockquote class="verse">
-    وَلَا تَحْسَبَنَّ الَّذِينَ قُتِلُوا فِي سَبِيلِ اللَّهِ أَمْوَاتًا ۚ
-    بَلْ أَحْيَاءٌ عِندَ رَبِّهِمْ يُرْزَقُونَ
-    <cite>— سوره آل‌عمران، آیه ۱۶۹</cite>
-  </blockquote>
-
-  <p>
-    از جمع این دو آیه چند نکته روشن می‌شود: اول، این حیات مخصوص
-    <strong>شهدای راه خدا</strong> است، نه هر کس که از دنیا می‌رود.
-    دوم، خصوصیات این حیات طبق سوره آل‌عمران سه‌گانه است:
-  </p>
-
-  <ol class="numbered-list">
-    <li>حیاتی الهی و معنوی روحانی است، نه مادی مربوط به جسم</li>
-    <li>روزی می‌برند نزد خداوند — نه از جنس روزی‌های ما و نه از جنس روزی‌های اهل بهشت</li>
-    <li>
-      حشر آنان با خداوند و حضور در پیشگاه اوست؛ مهمانانی که با کرامت
-      او به‌سر می‌برند:
-      <span class="arabic-inline">فَرِحِينَ بِمَا آتَاهُمُ اللَّهُ مِن فَضْلِهِ</span>
-    </li>
-  </ol>
-
-  <p>
-    کتاب <em>المعجم فی فقه القرآن (ج۴، ص۷۷۴)</em> در مورد حیات شهدا می‌گوید:
-    «حیات آنان به شکلی بالاتر و اشرف از حیاتشان در دنیا استمرار یافته،
-    به‌طوری‌که نحوه آن حیات را غیر از خدا کسی نمی‌داند» — و این مخصوص
-    شهداست، نه آن حیات برزخی که برای عموم مؤمنین گفته شده.
-  </p>
-
-  <p>
-    نتیجه: از این دو آیه نه حیات برزخی استفاده می‌شود و نه بقاء روح.
-  </p>
-
-  <hr class="section-divider" />
-
-  <!-- جمع‌بندی -->
-  <h3 class="subsection-title">جمع‌بندی</h3>
-
-  <div class="hadith conclusion-box">
-    <p class="hadith-translation" style="font-size:1rem; line-height:2;">
-      اعتقاد به حیات برزخی — چنان‌که علامه طباطبایی در جلد اول المیزان
-      (ص ۳۵۱) اظهار نموده — از ضروریات قرآن نبوده و مسلمانان نیز اجماع
-      نظر بر آن ندارند. انکار آن، انکار ضروری دین نیست.
-    </p>
-    <p class="hadith-source">— المیزان، ج۱، ص۳۵۱</p>
-  </div>
-
-  <p>
-    در هیچ‌یک از آیات قرآن درباره گفت‌وگوهای بهشتیان و جهنمیان پس از
-    مرگ تا قیامت مطلبی دیده نمی‌شود که بنمیان پس از
-    مرگ تا قیامت مطلبی دیده نمی‌شود که بته پایانی: شاید تعصب فیلسوفان و عارفان و بسیاری از دانشمندان اسلامی
-    بر اعتقاد به روح، از این توهم ناشی شده که انکار روح مساوی انکار خداوند
-    یا قیامت یا مجردات است. در صورتی‌که اثبات همه این قدرت‌های غیرمادی
-    برای <strong>مغز انسان در حیات</strong>، هیچ‌گونه منافاتی با اعتقاد به
-    خدا و قیامت ندارد. چون مادیون منکر خداوند، روح را نیز منکر می‌شدند،
-    این توهم پیش آمده که هر که روح را انکار کند بالملازمه منکر خداوند است —
-    در صورتی‌که چنین ملازمه‌ای در کار نیست.
-  </p>
-
-</article>
-<!-- ══ پایان بخش ۲ ══════════════════════════════════════ -->
